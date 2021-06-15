@@ -3,6 +3,18 @@
 </template>
 
 <style lang="scss">
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  border-radius: 3.5px;
+  background-color: rgba(50,50,50,.1);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to right,#0acffe 0,#495aff 100%);
+  -webkit-box-shadow: inset 0 0 10px rgb(0 0 0 / 20%);
+}
 .icon {
   width: 1em; height: 1em;
   vertical-align: -0.15em;
@@ -20,6 +32,7 @@
   padding: 0px;
   margin: 0px;
   box-sizing:border-box !important;
+  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
 }
 
 #nav {
