@@ -81,8 +81,13 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+  li:hover img{
+    transition: all .3s;
+    transform: scale(1.1);
+  }
   .DiaryNew{
     width: 100%;
+    cursor: pointer;
     .Header{
       padding: 0px 20px;
       margin: 10px 15px;

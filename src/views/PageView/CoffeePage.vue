@@ -22,43 +22,6 @@
       </div>
     </div>
     <div class="MainBox">
-<!--      <div class="LeftPlan">
-        <div class="ToolsBox">
-          <el-card shadow="hover">
-            <div class="ToolList">
-              <ul>
-                <li>
-                  <a href="#">
-                    <img src="http://q1.qlogo.cn/g?b=qq&nk=2513356652&s=640" alt="">
-                    <span>影视</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <img src="http://q1.qlogo.cn/g?b=qq&nk=2513356652&s=640" alt="">
-                    <span>影视</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <img src="http://q1.qlogo.cn/g?b=qq&nk=2513356652&s=640" alt="">
-                    <span>影视</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </el-card>
-        </div>
-      </div>
-      <div class="RightPlan">
-        <div class="IndexPlayBox">
-          <el-card class="box-card">
-            <div v-for="o in 4" :key="o" class="text item">
-              {{'每日提示 ' + o }}
-            </div>
-          </el-card>
-        </div>
-      </div>-->
       <div class="LeftMenu">
         <div class="MenuList">
           <ul>
@@ -68,7 +31,7 @@
                   <use xlink:href="#icon-COFFEESHOP"></use>
                  </svg>
               </span>
-              <span class="Title">动态</span>
+              <span class="Title"><router-link to="./shulog">动态</router-link></span>
             </li>
             <li>
               <span class="icon">
@@ -76,7 +39,7 @@
                   <use xlink:href="#icon-daiban"></use>
                  </svg>
               </span>
-              <span class="Title">博客</span>
+              <span class="Title"><router-link to="./blog">博客</router-link></span>
             </li>
             <li>
               <span class="icon">
@@ -84,54 +47,40 @@
                   <use xlink:href="#icon-rili"></use>
                  </svg>
               </span>
-              <span class="Title">日记</span>
+              <span class="Title">
+                <router-link to="./diary">日记</router-link>
+              </span>
             </li>
           </ul>
         </div>
       </div>
       <div class="RightMain">
-        <div class="Left">
-          <div class="DiaryNewBox">
-            <DiaryNew></DiaryNew>
-          </div>
-          <div class="post-article">
-            <PostItem></PostItem>
-            <PostItem></PostItem>
-            <PostItem></PostItem>
-            <PostItem></PostItem>
-            <PostItem></PostItem>
-            <PostItem></PostItem>
-            <PostItem></PostItem>
-            <PostItem></PostItem>
-            <PostItem></PostItem>
-          </div>
-          <el-pagination style="text-align: center"
-            background
-            layout="prev, pager, next"
-            :total="1000">
-          </el-pagination>
-        </div>
-        <div class="Right">
-          ```````333
-        </div>
+        <router-view ></router-view>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { defineComponent, reactive } from 'vue'
-import DiaryNew from '@/components/CoffeeComponent/community/DiaryNew'
-import PostItem from '@/components/CoffeeComponent/community/PostItem'
+import { defineComponent, onMounted, reactive, toRefs, watch } from 'vue'
+import { onBeforeRouteUpdate, useRoute } from 'vue-router'
 
 export default defineComponent({
   name: 'CoffeePage',
   components: {
-    DiaryNew,
-    PostItem
   },
   setup () {
-    return {}
+    const state = reactive({
+      show: false
+    })
+    onMounted(() => {
+      setTimeout(() => {
+        state.show = true
+      }, 300)
+    })
+    return {
+      ...toRefs(state)
+    }
   }
 })
 </script>
@@ -167,50 +116,13 @@ export default defineComponent({
       }
     }
     .MainBox{
-      padding: 15px;
+      //padding: 15px;
+      height: calc(100vh - 3.4rem);
       display: flex;
-/*      .LeftPlan{
-        .ToolsBox{
-          .ToolList{
-            ul{
-              display: flex;
-              width: 100%;
-              li{
-                text-align: center;
-                img {
-                  width: 100%;
-                  height: 70%;
-                }
-                display: flex;
-                flex-direction: column;
-                height:130px;
-                width: 100px;
-                border: solid #cac6c6 1px;
-                span{
-                  font-size: 20px;
-                  font-weight: 700;
-                }
-              }
-            }
-          }
-        }
-        display: flex;
-        flex-direction: column;
-        width: 100vh;
-        padding: 10px;
-        .ToolsBox{
-          flex-grow: 1;
-        }
-      }
-      .RightMain{
-        flex-grow: 1;
-        width: 100vh;
-        padding: 10px;
-      }*/
       .LeftMenu{
         border-right: 1px solid #F0F0F0;
-        width: 14%;
-        height:  calc(100vh - 1.3rem);
+        width: 10%;
+        height:  calc(100vh - 4.3rem);
         ul li{
           .icon{
             margin-right: 8px;
@@ -234,22 +146,9 @@ export default defineComponent({
         }
       }
       .RightMain{
-        display: flex;
-        flex-grow: 1;
-        .Left{
-          width: 60%;
-          display: flex;
-          flex-direction: column;
-          .DiaryNewBox{
-            padding: 15px;
-          }
-          .post-article{
-            padding: 15px;
-          }
-        }
-        .Right{
-          flex-grow: 1;
-        }
+        height: calc(100vh - 3.4rem);
+        overflow: auto;
+        width: 90%;
       }
     }
   }

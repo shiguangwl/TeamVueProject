@@ -2,6 +2,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 
 import Index from '../views/Index.vue'
 import IndexPage from '../views/PageView/IndexPage.vue'
+// 项目模块路由
 const projectChildren = [
   {
     path: 'arrange',
@@ -17,6 +18,24 @@ const projectChildren = [
     path: 'file',
     name: 'File',
     component: () => import('@/views/PageView/ProjectIntoView/FilePageView.vue')
+  }
+]
+// 社区模块路由
+const coffeecommunityChildren = [
+  {
+    path: 'shulog',
+    name: 'shulog',
+    component: () => import('@/views/PageView/CoffeePageView/ShuLogView.vue')
+  },
+  {
+    path: 'blog',
+    name: 'blog',
+    component: () => import('@/views/PageView/CoffeePageView/BlogView.vue')
+  },
+  {
+    path: 'diary',
+    name: 'diary',
+    component: () => import('@/views/PageView/CoffeePageView/DiaryView.vue')
   }
 ]
 const routes: Array<RouteRecordRaw> = [
@@ -64,7 +83,9 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: 'coffee',
         name: 'Coffee',
-        component: () => import('@/views/PageView/CoffeePage.vue')
+        redirect: '/coffee/shulog',
+        component: () => import('@/views/PageView/CoffeePage.vue'),
+        children: coffeecommunityChildren
       }
     ]
   }
@@ -74,5 +95,4 @@ const router = createRouter({
   history: createWebHistory(),
   routes
 })
-
 export default router
