@@ -23,7 +23,7 @@
     <div class="Todos">
       <ul>
         <li>
-          <div class="left"><input type="checkbox"></div>
+          <div class="left"><input type="checkbox" class="tui-checkbox"></div>
           <div class="middle">
             <span class="todo_title">我是TODO标题送到附近大理烦得很</span>
             <span class="todo_des">
@@ -38,7 +38,7 @@
           </div>
         </li>
         <li>
-          <div class="left"><input type="checkbox"></div>
+          <div class="left"><input type="checkbox" class="tui-checkbox"></div>
           <div class="middle">
             <span class="todo_title">我是TODO标题送到附近大理烦得很</span>
             <span class="todo_des">
@@ -53,7 +53,7 @@
           </div>
         </li>
         <li>
-          <div class="left"><input type="checkbox"></div>
+          <div class="left"><input type="checkbox" class="tui-checkbox"></div>
           <div class="middle">
             <span class="todo_title">我是TODO标题送到附近大理烦得很</span>
             <span class="todo_des">
@@ -68,7 +68,7 @@
           </div>
         </li>
         <li>
-          <div class="left"><input type="checkbox"></div>
+          <div class="left"><input type="checkbox" class="tui-checkbox"></div>
           <div class="middle">
             <span class="todo_title">我是TODO标题送到附近大理烦得很</span>
             <span class="todo_des">
@@ -83,7 +83,7 @@
           </div>
         </li>
         <li>
-          <div class="left"><input type="checkbox"></div>
+          <div class="left"><input type="checkbox" class="tui-checkbox"></div>
           <div class="middle">
             <span class="todo_title">我是TODO标题送到附近大理烦得很</span>
             <span class="todo_des">
@@ -104,32 +104,32 @@
       <div class="comTodoList">
         <ul>
           <li>
-            <input type="checkbox" />
+            <input type="checkbox" class="tui-checkbox" />
             <a href="#">2021年6月3日10:06</a>
             <span class="todo_title">我是标题</span>
           </li>
           <li>
-            <input type="checkbox" />
+            <input type="checkbox" class="tui-checkbox" />
             <a href="#">2021年6月3日10:06</a>
             <span class="todo_title">我是标题</span>
           </li>
           <li>
-            <input type="checkbox" />
+            <input type="checkbox" class="tui-checkbox" />
             <a href="#">2021年6月3日10:06</a>
             <span class="todo_title">我是标题</span>
           </li>
           <li>
-            <input type="checkbox" />
+            <input type="checkbox" class="tui-checkbox" />
             <a href="#">2021年6月3日10:06</a>
             <span class="todo_title">我是标题</span>
           </li>
           <li>
-            <input type="checkbox" />
+            <input type="checkbox" class="tui-checkbox" />
             <a href="#">2021年6月3日10:06</a>
             <span class="todo_title">我是标题</span>
           </li>
           <li>
-            <input type="checkbox" />
+            <input type="checkbox" class="tui-checkbox" />
             <a href="#">2021年6月3日10:06</a>
             <span class="todo_title">我是标题</span>
           </li>
@@ -155,6 +155,46 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+  .tui-checkbox:checked {
+    background:#1673ff
+  }
+  .tui-checkbox {
+    cursor: pointer !important;
+    width:1.3rem;
+    height:1.3rem;
+    background-color:#ffffff;
+    border:solid 1px #dddddd;
+    -webkit-border-radius:50%;
+    border-radius:50%;
+    font-size:0.8rem;
+    margin:0;
+    padding:0;
+    position:relative;
+    display:inline-block;
+    vertical-align:top;
+    cursor:default;
+    -webkit-appearance:none;
+    -webkit-user-select:none;
+    user-select:none;
+    -webkit-transition:background-color ease 0.1s;
+    transition:background-color ease 0.1s;
+  }
+  .tui-checkbox:checked::after {
+    content:'';
+    top:5px;
+    left:5px;
+    position:absolute;
+    background:transparent;
+    border:#fff solid 2px;
+    border-top:none;
+    border-right:none;
+    height:6px;
+    width:10px;
+    -moz-transform:rotate(-45deg);
+    -ms-transform:rotate(-45deg);
+    -webkit-transform:rotate(-45deg);
+    transform:rotate(-45deg);
+  }
   .TodoMainContent{
     width: 80%;
   }
@@ -173,6 +213,13 @@ export default defineComponent({
       margin: 10px 0px;
       height: 45px;
       display: flex;
+      border-radius: 10px;
+      .todo_title{
+        font-size: 1.1rem;
+      }
+      .todo_des{
+        color: #cac6c6;
+      }
       .middle{
         display: flex;
         flex-direction: column;
@@ -180,16 +227,27 @@ export default defineComponent({
       }
       .right{
         cursor: pointer;
-        font-size: 16px;
+        margin: auto;
+        font-size: 1.3rem;
+      }
+      .left{
+        padding-top: 0.1rem;
+        padding-right: 10px;
       }
     }
     ul li:hover{
       background-color: #F7F7F7;
     }
-    .compTodo{
+  }
+  .compTodo{
+    .comTodoList{
       display: flex;
+      a{
+        margin-left: 10px;
+      }
       ul li{
         display: flex;
+        margin: 10px 0;
       }
     }
   }

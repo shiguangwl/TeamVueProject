@@ -20,6 +20,7 @@ const projectChildren = [
     component: () => import('@/views/PageView/ProjectIntoView/FilePageView.vue')
   }
 ]
+
 // 社区模块路由
 const coffeecommunityChildren = [
   {
@@ -36,8 +37,20 @@ const coffeecommunityChildren = [
     path: 'diary',
     name: 'diary',
     component: () => import('@/views/PageView/CoffeePageView/DiaryView.vue')
+  },
+  {
+    path: 'movie',
+    name: 'movie',
+    component: () => import('@/views/PageView/CoffeePageView/MovieView.vue')
+  },
+  // 社区影视子路由
+  {
+    path: 'movie/show-:id',
+    name: 'ShowMovieInfo',
+    component: () => import('@/views/PageView/CoffeePageView/MovieChildrenView/ShowMovieInfo.vue')
   }
 ]
+
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',

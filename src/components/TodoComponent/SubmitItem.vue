@@ -6,6 +6,9 @@
       <div class="btn_left">
         <button class="button_settime"><i class="el-icon-plus"></i><span>设置时间规则</span></button>
       </div>
+      <div class="btn_middle">
+        <slot></slot>
+      </div>
       <div class="btn_right">
         <el-button round size="small" type="primary" icon="el-icon-edit">提交</el-button>
       </div>

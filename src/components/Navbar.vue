@@ -81,7 +81,7 @@ export default defineComponent({
       flex-direction: column;
       justify-content: space-between;
       height: 100%;
-      padding: 15px;
+      padding: 10px;
       .avatar{
         width: 100%;
       }

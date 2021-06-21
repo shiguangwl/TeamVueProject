@@ -31,7 +31,7 @@
                   <use xlink:href="#icon-COFFEESHOP"></use>
                  </svg>
               </span>
-              <span class="Title"><router-link to="./shulog">动态</router-link></span>
+              <span class="Title"><router-link to="/coffee/shulog">动态</router-link></span>
             </li>
             <li>
               <span class="icon">
@@ -39,7 +39,7 @@
                   <use xlink:href="#icon-daiban"></use>
                  </svg>
               </span>
-              <span class="Title"><router-link to="./blog">博客</router-link></span>
+              <span class="Title"><router-link to="/coffee/blog">博客</router-link></span>
             </li>
             <li>
               <span class="icon">
@@ -48,14 +48,26 @@
                  </svg>
               </span>
               <span class="Title">
-                <router-link to="./diary">日记</router-link>
+                <router-link to="/coffee/diary">日记</router-link>
+              </span>
+            </li>
+            <li>
+              <span class="icon">
+                 <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-rili"></use>
+                 </svg>
+              </span>
+              <span class="Title">
+                <router-link to="/coffee/movie">影院</router-link>
               </span>
             </li>
           </ul>
         </div>
       </div>
       <div class="RightMain">
-        <router-view ></router-view>
+        <transition name="el-fade-in">
+          <router-view ></router-view>
+        </transition>
       </div>
     </div>
   </div>

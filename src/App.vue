@@ -35,6 +35,18 @@
   font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
 }
 
+@font-face {
+  font-family: 'MFShangYa';
+  src: url('./assets/font/MFShangYa.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'HYTiaoTiao';
+  src: url('./assets/font/HYTiaoTiao.ttf?20201105') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 #nav {
   padding: 30px;
 

@@ -4,7 +4,9 @@
       <Navbar></Navbar>
     </div>
     <div class="rootmian_box">
-      <router-view/>
+      <transition name="el-zoom-in-center">
+        <router-view/>
+      </transition>
     </div>
   </div>
 </template>
