@@ -127,7 +127,7 @@ const routes: Array<RouteRecordRaw> = [
         children: coffeecommunityChildren
       },
       {
-        path: 'settings',
+        path: '/settings',
         name: 'settings',
         component: () => require('@/views/PageView/SettingsView.vue')
       }

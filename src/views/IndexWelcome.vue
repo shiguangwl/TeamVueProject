@@ -1,3 +1,4 @@
+<!--网站首页-->
 <template>
   <div class="IndexWelcome">
     <div>首页 待开发</div>

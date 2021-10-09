@@ -1,3 +1,4 @@
+<!--登录界面 TODO 注册功能-->
 <template>
   <div class="relative min-h-screen flex">
     <div
@@ -356,7 +357,6 @@ export default defineComponent({
         // console.log(res)
       }
     }
-    // 暴露
     return {
       ...toRefs(state),
       loginFun,

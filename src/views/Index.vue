@@ -1,3 +1,4 @@
+<!--用户基本框架-->
 <template>
   <div class="main">
     <div class="navbar_box">
