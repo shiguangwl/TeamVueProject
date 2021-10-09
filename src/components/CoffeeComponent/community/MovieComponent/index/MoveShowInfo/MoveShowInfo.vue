@@ -53,7 +53,9 @@
       <img src="https://oss.wwdianying.net/dy/f0ad74caeb6882076ed826a41813d140" alt="">
     </div>
     <div class="bottom">
-      <el-button style="float: right;width: 200px" type="success" icon="el-icon-share" round>立即播放</el-button>
+      <router-link :to="{ path: '/coffee/movie/play-2'}">
+        <el-button style="float: right;width: 200px" type="success" icon="el-icon-share" round>立即播放</el-button>
+      </router-link>
     </div>
   </div>
 </template>

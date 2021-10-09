@@ -5,9 +5,13 @@
         <el-col :span="20">
           <el-card shadow="always">
             这是顶部Card  待修改   <!--// TODO 待修改-->
+            <input type="button" @click="logout()" value="登出">
           </el-card>
         </el-col>
       </el-row>
+      <router-link :to="{ path: '/settings' }">
+        <el-button type="success">个人中心</el-button>
+      </router-link>
     </div>
     <div class="cards">
       <div class="card1">
@@ -55,11 +59,19 @@
 
 <script>
 import { defineComponent, reactive } from 'vue'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
   name: 'IndexPage',
   setup () {
-    return {}
+    const router = useRouter()
+    const logout = () => {
+      window.sessionStorage.removeItem('token')
+      router.push('/')
+    }
+    return {
+      logout
+    }
   }
 })
 </script>

@@ -1,6 +1,7 @@
 <template>
-  <div class="ConditionComponent">
-    ConditionComponent
+  <div class="IndexWelcome">
+    <div>首页 待开发</div>
+    <a href="./login">点我去登录界面</a>
   </div>
 </template>
 
@@ -8,7 +9,7 @@
 import { defineComponent, reactive } from 'vue'
 
 export default defineComponent({
-  name: 'ConditionComponent',
+  name: 'IndexWelcome',
   setup () {
     return {}
   }

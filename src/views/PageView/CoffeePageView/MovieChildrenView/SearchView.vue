@@ -9,19 +9,14 @@
       </div>
     </div>
     <div class="bottom">
-      <div class="CategoryShowListBox">
-        <VShowBox></VShowBox>
+      <div class="text">
+        <div><span class="t1">穿越火线</span></div>
+        <div><span class="t2">搜索"穿越火线" ，找到 6部影视作品</span></div>
       </div>
-      <div class="CategoryShowListBox">
-        <el-row>
-          <el-col :span="20">
-            <VShowBox></VShowBox>
-          </el-col>
-          <el-col :span="4">
-            <VSortList></VSortList>
-          </el-col>
-        </el-row>
-      </div>
+      <StoPlayInfo></StoPlayInfo>
+      <StoPlayInfo></StoPlayInfo>
+      <StoPlayInfo></StoPlayInfo>
+      <StoPlayInfo></StoPlayInfo>
     </div>
     <div class="foot">
       <div class="more">
@@ -35,15 +30,12 @@
 <script>
 import { defineComponent, reactive } from 'vue'
 import VSearch from '@/components/CoffeeComponent/community/MovieComponent/index/VSearch'
-import VShowBox from '@/components/CoffeeComponent/community/MovieComponent/index/VshowBox/VShowBox'
-import VSortList from '@/components/CoffeeComponent/community/MovieComponent/index/VSortList'
-
+import StoPlayInfo from '@/components/CoffeeComponent/community/MovieComponent/index/MoveShowInfo/StoPlayInfo'
 export default defineComponent({
   name: 'MovieView',
   components: {
     VSearch,
-    VShowBox,
-    VSortList
+    StoPlayInfo
   },
   setup () {
     return {}
@@ -81,6 +73,24 @@ export default defineComponent({
     .CategoryShowListBox{
       width: 90%;
       margin: 0 auto;
+    }
+    .bottom{
+      width: 90%;
+      margin: 50px auto;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      .text{
+        text-align: center;
+        width: 100%;
+        .t1{
+          font-size: 2rem;
+          font-weight: 700;
+        }
+        .t2{
+          font-size: 0.3rem;
+        }
+      }
     }
   }
   .more{

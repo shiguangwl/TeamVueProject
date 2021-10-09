@@ -23,52 +23,69 @@
     </div>
     <div class="MainBox">
       <div class="LeftMenu">
-        <div class="MenuList">
-          <ul>
-            <li>
-              <span class="icon">
-                 <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-COFFEESHOP"></use>
-                 </svg>
-              </span>
-              <span class="Title"><router-link to="/coffee/shulog">动态</router-link></span>
-            </li>
-            <li>
-              <span class="icon">
-                 <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-daiban"></use>
-                 </svg>
-              </span>
-              <span class="Title"><router-link to="/coffee/blog">博客</router-link></span>
-            </li>
-            <li>
-              <span class="icon">
-                 <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-rili"></use>
-                 </svg>
-              </span>
-              <span class="Title">
-                <router-link to="/coffee/diary">日记</router-link>
-              </span>
-            </li>
-            <li>
-              <span class="icon">
-                 <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-rili"></use>
-                 </svg>
-              </span>
-              <span class="Title">
-                <router-link to="/coffee/movie">影院</router-link>
-              </span>
-            </li>
-          </ul>
+          <div class="MenuList">
+            <ul>
+              <router-link to="/coffee/shulog">
+                <li>
+                <span class="icon">
+                   <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-COFFEESHOP"></use>
+                   </svg>
+                </span>
+                  <span class="Title">动态</span>
+                </li>
+              </router-link>
+              <router-link to="/coffee/blog">
+                <li>
+                <span class="icon">
+                   <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-daiban"></use>
+                   </svg>
+                </span>
+                  <span class="Title">博客</span>
+                </li>
+              </router-link>
+              <router-link to="/coffee/diary">
+                <li>
+                <span class="icon">
+                   <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-rili"></use>
+                   </svg>
+                </span>
+                  <span class="Title">
+                  日记
+                </span>
+                </li>
+              </router-link>
+              <router-link to="/coffee/movie">
+                <li>
+                <span class="icon">
+                   <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-rili"></use>
+                   </svg>
+                </span>
+                  <span class="Title">
+                  影院
+                </span>
+                </li>
+              </router-link>
+            </ul>
+          </div>
         </div>
-      </div>
       <div class="RightMain">
-        <transition name="el-fade-in">
-          <router-view ></router-view>
-        </transition>
-      </div>
+          <!--        <transition name="el-fade-in">-->
+          <!--          <keep-alive>-->
+          <!--            <router-view ></router-view>-->
+          <!--          </keep-alive>-->
+          <!--        </transition>-->
+          <router-view v-slot="{ Component }">
+            <transition name="el-fade-in">
+              <keep-alive>
+                <component :is="Component"/>
+              </keep-alive>
+            </transition>
+          </router-view>
+        </div>
     </div>
   </div>
 </template>

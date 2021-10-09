@@ -4,12 +4,14 @@
       <input type="text" placeholder="全网搜索你想看的~"   @focus="isshow=false" @blur="isshow=true"  >
       <div class="right">
         <div class="all_btn">
-          <i class="el-icon-s-opportunity"></i>
-          <span>搜全网</span>
+          <router-link :to="{ path: '/coffee/movie/search-3' }">
+            <i class="el-icon-s-opportunity"></i>
+            <span>搜全网</span>
+          </router-link>
         </div>
         <el-divider direction="vertical"></el-divider>
         <div class="search_btn">
-            <i class="el-icon-search"></i>
+            <router-link :to="{ path: '/coffee/movie/search-3' }"><i class="el-icon-search"></i></router-link>
         </div>
       </div>
     </div>
@@ -76,7 +78,9 @@ export default defineComponent({
       .right{
         display: flex;
         align-items: center;
-        color: #db542f;
+        a{
+          color: #db542f !important;
+        }
       }
     }
     .Hot{

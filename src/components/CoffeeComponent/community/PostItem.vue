@@ -4,10 +4,12 @@
       <img src="https://avatar.is.fail/avatar/92ceb0b9df8a2753af61cf94adcdd186?&s=100" alt="">
       <span>TimeHo</span>
     </div>
+    <router-link :to="{ path: '/coffee/shulog/article-10' }">
     <div class="content">
       我是这个动态的内容我是这个动态的内容我是这个动态的内容我是这个动态的内容我是这个动态的内容
       我是这个动态的内容我是这个动态的内容我是这个动态的内容我是这个动态的内容我是这个动态的内容
     </div>
+    </router-link>
     <div class="like">
       <div class="tag">
         <el-check-tag checked style="margin-right: 8px;">日常分享</el-check-tag>

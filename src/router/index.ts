@@ -43,24 +43,50 @@ const coffeecommunityChildren = [
     name: 'movie',
     component: () => import('@/views/PageView/CoffeePageView/MovieView.vue')
   },
-  // 社区影视子路由
+  // 社区 影视 子路由
   {
     path: 'movie/show-:id',
     name: 'ShowMovieInfo',
     component: () => import('@/views/PageView/CoffeePageView/MovieChildrenView/ShowMovieInfo.vue')
+  },
+  {
+    path: 'movie/play-:id',
+    name: 'PlayView',
+    component: () => import('@/views/PageView/CoffeePageView/MovieChildrenView/PlayView.vue')
+  },
+  {
+    path: 'movie/search-:id',
+    name: 'SearchView',
+    component: () => import('@/views/PageView/CoffeePageView/MovieChildrenView/SearchView.vue')
+  },
+  {
+    path: 'movie/condition-:id',
+    name: 'ConditionView',
+    component: () => import('@/views/PageView/CoffeePageView/MovieChildrenView/ConditionView.vue')
+  },
+  // ShuLog 社区路由
+  {
+    path: 'shulog/article-:id',
+    name: 'article',
+    component: () => import('@/views/PageView/CoffeePageView/ShuLogPageView/ArticleView.vue')
   }
 ]
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
+    component: () => import('@/views/IndexWelcome.vue'),
+    name: 'IndexWelcome'
+  },
+  {
+    path: '/login',
     component: () => import('@/views/LogIn.vue'),
     name: 'Login'
   },
   {
-    path: '/',
+    path: '/main',
     component: Index,
-    redirect: '/index',
+    redirect: 'index',
     children: [
       {
         path: '/index',
@@ -70,35 +96,40 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: '/todo',
         name: 'Todo',
-        component: () => import('@/views/PageView/TodoPage.vue')
+        component: () => require('@/views/PageView/TodoPage.vue')
       },
       {
         path: '/project',
         name: 'Project',
-        component: () => import('@/views/PageView/ProjectPage.vue')
+        component: () => require('@/views/PageView/ProjectPage.vue')
       },
       {
         path: '/project/:id',
         name: 'projectView',
-        component: () => import('@/views/PageView/ProjectIntoView/ProjectView.vue'),
+        component: () => require('@/views/PageView/ProjectIntoView/ProjectView.vue'),
         children: projectChildren
       },
       {
         path: '/calendar',
         name: 'Calendar',
-        component: () => import('@/views/PageView/CalendarPage.vue')
+        component: () => require('@/views/PageView/CalendarPage.vue')
       },
       {
         path: '/files',
         name: 'FilesPage',
-        component: () => import('@/views/PageView/FilesPage.vue')
+        component: () => require('@/views/PageView/FilesPage.vue')
       },
       {
-        path: 'coffee',
+        path: '/coffee',
         name: 'Coffee',
         redirect: '/coffee/shulog',
         component: () => import('@/views/PageView/CoffeePage.vue'),
         children: coffeecommunityChildren
+      },
+      {
+        path: 'settings',
+        name: 'settings',
+        component: () => require('@/views/PageView/SettingsView.vue')
       }
     ]
   }
@@ -107,5 +138,13 @@ const routes: Array<RouteRecordRaw> = [
 const router = createRouter({
   history: createWebHistory(),
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.path === '/' || to.path === '/login') { return next() }
+  // 获取token
+  const tokenStr = window.sessionStorage.getItem('token')
+  if (!tokenStr) { return next('/') }
+  next()
 })
 export default router

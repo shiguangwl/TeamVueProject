@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
+//    "noImplicitAny": false,   // 解决 Parameter ‘XXX’ implicitly has an ‘any’ type.
     "target": "esnext",
     "module": "esnext",
-    "strict": true,
+    "strict": false,
     "jsx": "preserve",
     "importHelpers": true,
     "moduleResolution": "node",

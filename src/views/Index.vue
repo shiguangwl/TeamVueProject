@@ -1,12 +1,19 @@
 <template>
   <div class="main">
     <div class="navbar_box">
+      <!--   侧边栏菜单   -->
       <Navbar></Navbar>
     </div>
+    <!--  主显示区域  -->
     <div class="rootmian_box">
-      <transition name="el-zoom-in-center">
-        <router-view/>
-      </transition>
+      <!--   路由动画   -->
+      <router-view v-slot="{ Component }">
+        <transition name="el-zoom-in-center">
+          <keep-alive>
+            <component :is="Component"/>
+          </keep-alive>
+        </transition>
+      </router-view>
     </div>
   </div>
 </template>
@@ -37,6 +44,7 @@ export default defineComponent({
   }
   .rootmian_box{
     width: 95%;
-    height: 100%;
+    height: 100vh;
+    overflow: hidden;
   }
 </style>

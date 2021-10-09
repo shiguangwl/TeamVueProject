@@ -1,3 +1,6 @@
+<!--
+搜索组件
+-->
 <template>
   <div class="SearchComponent">
     <div class="Menu">
