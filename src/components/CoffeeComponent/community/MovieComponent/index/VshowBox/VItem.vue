@@ -2,23 +2,31 @@
   <div class="VItem">
     <div class="img">
       <router-link :to="{ path: '/coffee/movie/show-2' }">
-        <img src="https://oss.wwdianying.net/dy/2368d999dfdf2cc1c1951d7a52742c46" alt="">
+        <img :src="dataItem.img" alt="">
       </router-link>
     </div>
     <div class="title">
-      <router-link :to="{ path: '/coffee/movie/show-2' }">斗罗大陆</router-link>
+      <router-link :to="{ path: '/coffee/movie/show-2' }">{{dataItem.title}}</router-link>
     </div>
-    <span>更新到161话</span>
+    <span>{{dataItem.hint}}</span>
   </div>
 </template>
 
 <script>
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, reactive, toRefs } from 'vue'
 
 export default defineComponent({
   name: 'VItem',
-  setup () {
-    return {}
+  props: {
+    data: Object
+  },
+  setup (props, ctx) {
+    const state = reactive({
+      dataItem: props.data
+    })
+    return {
+      ...toRefs(state)
+    }
   }
 })
 </script>
@@ -38,8 +46,8 @@ export default defineComponent({
       color: #BFBFBF;
     }
     img{
-      width: 100%;
-      height: 100%;
+      width: 170px;
+      height: 240px;
       border-radius: 10px;
       overflow: hidden;
       cursor: pointer;

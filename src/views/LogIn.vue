@@ -66,6 +66,7 @@
         </ul>
       </div>
       <div
+        style="height: 100vh"
         class="
                         md:flex md:items-center md:justify-center
                         w-full
@@ -156,10 +157,12 @@
           <!--          </div>-->
           <div class="flex items-center justify-center space-x-2">
             <span class="h-px w-16 bg-gray-200"></span>
-            <span class="text-gray-300 font-normal">用户登录</span>
+            <span class="text-gray-300 font-normal" v-show="!isregister">用户登录</span>
+            <span class="text-gray-300 font-normal" v-show="isregister">用户注册</span>
             <span class="h-px w-16 bg-gray-200"></span>
           </div>
-          <form class="mt-8 space-y-6">
+          <!--    登录表单      -->
+          <form v-show="!isregister" class="mt-8 space-y-6">
             <input type="hidden" name="remember" value="true" />
             <div class="relative">
               <label class="ml-3 text-sm font-bold text-gray-700 tracking-wide"
@@ -286,7 +289,6 @@
             >
               <span>还没有账号？</span>
               <a
-                href="https://www.17sucai.com/"
                 target="_blank"
                 class="
                                         text-indigo-400
@@ -298,7 +300,196 @@
                                         ease-in
                                         duration-300
                                     "
-              >立即注册</a
+              @click="isregister=true">立即注册</a
+              >
+            </p>
+          </form>
+          <!--     注册表单     -->
+          <form v-show="isregister" class="mt-8 space-y-6">
+            <input type="hidden" name="remember" value="true" />
+<!--            电子邮件              -->
+            <div class="relative">
+              <label class="ml-3 text-sm font-bold text-gray-700 tracking-wide"
+              >电子邮箱</label
+              >
+              <input
+                class="
+                                        w-full
+                                        text-base
+                                        px-4
+                                        py-2
+                                        border-b border-gray-300
+                                        focus:outline-none
+                                        rounded-2xl
+                                        focus:border-indigo-500
+                                    "
+                type=""
+                v-model="registerData.email"
+                placeholder="请输入电子邮箱"
+              />
+            </div>
+<!--            用户名               -->
+            <div class="mt-8 content-center">
+              <label class="ml-3 text-sm font-bold text-gray-700 tracking-wide"
+              >用户名</label
+              >
+              <input
+                class="
+                                        w-full
+                                        content-center
+                                        text-base
+                                        px-4
+                                        py-2
+                                        border-b
+                                        rounded-2xl
+                                        border-gray-300
+                                        focus:outline-none focus:border-indigo-500
+                                    "
+                type=""
+                v-model="registerData.username"
+                placeholder="请输入用户名"
+              />
+            </div>
+<!--            密码                -->
+            <div class="mt-8 content-center">
+              <label class="ml-3 text-sm font-bold text-gray-700 tracking-wide"
+              >密码</label
+              >
+              <input
+                class="
+                                        w-full
+                                        content-center
+                                        text-base
+                                        px-4
+                                        py-2
+                                        border-b
+                                        rounded-2xl
+                                        border-gray-300
+                                        focus:outline-none focus:border-indigo-500
+                                    "
+                type=""
+                v-model="registerData.password"
+                placeholder="请输入密码"
+              />
+            </div>
+            <div class="mt-8 content-center">
+              <label class="ml-3 text-sm font-bold text-gray-700 tracking-wide"
+              >确认密码</label
+              >
+              <input
+                class="
+                                        w-full
+                                        content-center
+                                        text-base
+                                        px-4
+                                        py-2
+                                        border-b
+                                        rounded-2xl
+                                        border-gray-300
+                                        focus:outline-none focus:border-indigo-500
+                                    "
+                type=""
+                v-model="password"
+                placeholder="请确认密码"
+              />
+            </div>
+            <!--验证码-->
+            <div class="mt-8 content-center w-8/12" style="display: inline-block">
+              <label class="ml-3 text-sm font-bold text-gray-700 tracking-wide"
+              >验证码</label
+              >
+              <input
+                class="
+                                        w-full
+                                        content-center
+                                        text-base
+                                        px-4
+                                        py-2
+                                        border-b
+                                        rounded-2xl
+                                        border-gray-300
+                                        focus:outline-none focus:border-indigo-500
+                                    "
+                type=""
+                v-model="registerData.captcha"
+                placeholder="请输入验证码"
+              />
+            </div>
+            <div class="w-4/12" style="display: inline-block;height: 30px;">
+              <img :src="captchaURL+registerData.uuid" alt="" @click="updateUUID()">
+            </div>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center">
+                <input
+                  id="remember_me1"
+                  name="remember_me"
+                  type="checkbox"
+                  class="
+                                            h-4
+                                            w-4
+                                            bg-blue-500
+                                            focus:ring-blue-400
+                                            border-gray-300
+                                            rounded
+                                        "
+                />
+<!--                <label-->
+<!--                  for="remember_me"-->
+<!--                  class="ml-2 block text-sm text-gray-900"-->
+<!--                >记住我</label-->
+<!--                >-->
+              </div>
+              <div class="text-sm">
+                <a href="#" class="text-indigo-400 hover:text-blue-500"
+                >忘记密码？</a
+                >
+              </div>
+            </div>
+            <div>
+              <input type="button" value="登录" @click="register()" class="
+                     w-full
+                     flex
+                     justify-center
+                     bg-gradient-to-r
+                     from-indigo-500
+                     to-blue-600
+                     hover:bg-gradient-to-l
+                     hover:from-blue-500
+                     hover:to-indigo-600
+                     text-gray-100
+                     p-4
+                     rounded-full
+                     tracking-wide
+                     font-semibold
+                     shadow-lg
+                     cursor-pointer
+                     transition
+                     ease-in
+                     duration-500
+              ">
+            </div>
+            <p
+              class="
+                                    items-center
+                                    justify-center
+                                    mt-10
+                                    text-center text-md text-gray-500
+                                "
+            >
+              <span>已有账号？</span>
+              <a
+                target="_blank"
+                class="
+                                        text-indigo-400
+                                        hover:text-blue-500
+                                        no-underline
+                                        hover:underline
+                                        cursor-pointer
+                                        transition
+                                        ease-in
+                                        duration-300
+                                    "
+              @click="isregister=false">去登录</a
               >
             </p>
           </form>
@@ -321,6 +512,7 @@ export default defineComponent({
   },
   setup () {
     const state = reactive({
+      isregister: false,
       captchaURL: 'http://localhost:8080/renren-fast/captcha.jpg?uuid=',
       data: {
         username: 'admin',
@@ -328,7 +520,16 @@ export default defineComponent({
         captcha: '', // 验证码
         // eslint-disable-next-line no-use-before-define
         uuid: '' // 验证码对应uuid
-      }
+      },
+      registerData: {
+        username: '',
+        password: '',
+        email: '',
+        mobile: '00000000000',
+        captcha: '',
+        uuid: ''
+      },
+      password: ''
     })
     // 生成随地字符串ID
     function guid () {
@@ -339,10 +540,12 @@ export default defineComponent({
       })
     }
     state.data.uuid = guid()
+    state.registerData.uuid = guid()
     const uuidLocal = guid()
     // 获取新的验证码
     const updateUUID = () => {
       state.data.uuid = guid()
+      state.registerData.uuid = guid()
     }
     const router = useRouter()
     // 登录函数
@@ -357,10 +560,25 @@ export default defineComponent({
         // console.log(res)
       }
     }
+    // 注册函数
+    const register = async () => {
+      if (!(state.password === state.registerData.password)) {
+        ElMessage('确认密码不相同')
+        return
+      }
+      const { data: res } = await UserApi.Register(state.registerData)
+      if (res.code === 0) {
+        ElMessage({ message: '注册成功,请登录', type: 'success' })
+        state.isregister = false
+      } else {
+        ElMessage(res.msg)
+      }
+    }
     return {
       ...toRefs(state),
       loginFun,
-      updateUUID
+      updateUUID,
+      register
     }
   }
 })

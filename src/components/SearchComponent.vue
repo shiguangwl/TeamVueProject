@@ -7,18 +7,23 @@
       <i class="el-icon-menu"></i>
     </div>
     <div class="Search">
-      <el-input prefix-icon="el-icon-search" placeholder="请输入搜索内容"></el-input>
+      <el-input prefix-icon="el-icon-search" v-model="str" placeholder="请输入搜索内容"></el-input>
     </div>
   </div>
 </template>
 
 <script>
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, reactive, toRefs } from 'vue'
 
 export default defineComponent({
   name: 'SearchComponent',
   setup () {
-    return {}
+    const state = reactive({
+      str: ''
+    })
+    return {
+      ...toRefs(state)
+    }
   }
 })
 </script>

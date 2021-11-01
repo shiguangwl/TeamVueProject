@@ -8,21 +8,24 @@
 <!--    主要内容显示区域-->
     <div class="RightContent">
       <div class="TodoHeader">
+        <!--    头部搜索框    -->
         <TodoMainHeader></TodoMainHeader>
       </div>
       <div class="TodoContent">
-        <TodoMainContent></TodoMainContent>
+        <TodoMainContent :dataList="dataList" @loadData="getTodoProList()"></TodoMainContent>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, reactive, toRefs } from 'vue'
 import CategorayFilter from '@/components/TodoComponent/CategorayFilter'
 import ListGrop from '@/components/TodoComponent/ListGrop'
 import TodoMainHeader from '@/components/TodoComponent/TodoMainHeader'
 import TodoMainContent from '@/components/TodoComponent/TodoMainContent'
+import { todoPro } from '@/utils/api'
+
 export default defineComponent({
   name: 'TodoPage',
   components: {
@@ -32,7 +35,20 @@ export default defineComponent({
     TodoMainContent
   },
   setup () {
-    return {}
+    const state = reactive({
+      dataList: []
+    })
+    // 请求获取待办
+    const getTodoProList = async () => {
+      const { data: res } = await todoPro.todoList()
+      state.dataList = res.page.list
+    }
+    // 初始化
+    getTodoProList()
+    return {
+      ...toRefs(state),
+      getTodoProList
+    }
   }
 })
 </script>
@@ -53,5 +69,7 @@ export default defineComponent({
     flex-grow: 1;
     //background-color: red;
     padding: 10px;
+    height: 100vh;
+    overflow: scroll;
   }
 </style>

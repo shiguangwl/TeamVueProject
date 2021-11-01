@@ -43,6 +43,17 @@ const coffeecommunityChildren = [
     name: 'movie',
     component: () => import('@/views/PageView/CoffeePageView/MovieView.vue')
   },
+  {
+    path: 'writing',
+    name: 'writing',
+    component: () => import('@/views/PageView/CoffeePageView/WritingView.vue')
+  },
+  // blog子
+  {
+    path: 'blog/articleLong-:Id',
+    name: 'articleLong',
+    component: () => import('@/views/PageView/CoffeePageView/ArticleView.vue')
+  },
   // 社区 影视 子路由
   {
     path: 'movie/show-:id',
@@ -96,28 +107,28 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: '/todo',
         name: 'Todo',
-        component: () => require('@/views/PageView/TodoPage.vue')
+        component: () => import('@/views/PageView/TodoPage.vue')
       },
       {
         path: '/project',
         name: 'Project',
-        component: () => require('@/views/PageView/ProjectPage.vue')
+        component: () => import('@/views/PageView/ProjectPage.vue')
       },
       {
         path: '/project/:id',
         name: 'projectView',
-        component: () => require('@/views/PageView/ProjectIntoView/ProjectView.vue'),
+        component: () => import('@/views/PageView/ProjectIntoView/ProjectView.vue'),
         children: projectChildren
       },
       {
         path: '/calendar',
         name: 'Calendar',
-        component: () => require('@/views/PageView/CalendarPage.vue')
+        component: () => import('@/views/PageView/CalendarPage.vue')
       },
       {
         path: '/files',
         name: 'FilesPage',
-        component: () => require('@/views/PageView/FilesPage.vue')
+        component: () => import('@/views/PageView/FilesPage.vue')
       },
       {
         path: '/coffee',
@@ -129,7 +140,12 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: '/settings',
         name: 'settings',
-        component: () => require('@/views/PageView/SettingsView.vue')
+        component: () => import('@/views/PageView/SettingsView.vue')
+      },
+      {
+        path: '/whisper',
+        name: 'whisper',
+        component: () => import('@/views/PageView/CommunicationView.vue')
       }
     ]
   }

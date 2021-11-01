@@ -3,32 +3,9 @@
     <div class="TimeLine">
       <div class="block">
         <el-timeline>
-          <el-timeline-item timestamp="2018/4/12" placement="top">
-            <DiaryCentent></DiaryCentent>
-          </el-timeline-item>
-          <el-timeline-item timestamp="2018/4/3" placement="top">
-            <DiaryCentent></DiaryCentent>
-          </el-timeline-item>
-          <el-timeline-item timestamp="2018/4/2" placement="top">
-            <DiaryCentent></DiaryCentent>
-          </el-timeline-item>
-          <el-timeline-item timestamp="2018/4/2" placement="top">
-            <DiaryCentent></DiaryCentent>
-          </el-timeline-item>
-          <el-timeline-item timestamp="2018/4/2" placement="top">
-            <DiaryCentent></DiaryCentent>
-          </el-timeline-item>
-          <el-timeline-item timestamp="2018/4/2" placement="top">
-            <DiaryCentent></DiaryCentent>
-          </el-timeline-item>
-          <el-timeline-item timestamp="2018/4/2" placement="top">
-            <DiaryCentent></DiaryCentent>
-          </el-timeline-item>
-          <el-timeline-item timestamp="2018/4/2" placement="top">
-            <DiaryCentent></DiaryCentent>
-          </el-timeline-item>
-          <el-timeline-item timestamp="2018/4/2" placement="top">
-            <DiaryCentent></DiaryCentent>
+          <el-timeline-item v-for="item in pageData.list" :key="item.pkId"
+                            :timestamp="item.fdate" placement="top">
+            <DiaryCentent :data="item"></DiaryCentent>
           </el-timeline-item>
         </el-timeline>
       </div>
@@ -37,15 +14,34 @@
 </template>
 
 <script>
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, onMounted, provide, reactive, toRefs } from 'vue'
 import DiaryCentent from '@/components/CoffeeComponent/community/DiaryCentent'
+import { Community } from '@/utils/api'
+import { ElMessage } from 'element-plus'
 export default defineComponent({
   name: 'DiaryTimeLine',
   components: {
     DiaryCentent
   },
   setup () {
-    return {}
+    const state = reactive({
+      pageData: ''
+    })
+    // 查询日记列表
+    const GetDiaryList = async () => {
+      const { data: res } = await Community.GetDiaryList()
+      if (res.code === 0) {
+        state.pageData = res.page
+        state.pageData.list.reverse()
+      } else {
+        ElMessage(res.msg)
+      }
+    }
+    // 初始化数据
+    GetDiaryList()
+    return {
+      ...toRefs(state)
+    }
   }
 })
 </script>

@@ -10,6 +10,9 @@
         <span>一米阳光，一杯咖啡，一份心情，一种生活。</span>
       </div>
       <div class="Avatar_info">
+        <router-link :to="{ path: '/coffee/writing'}">
+          <el-button type="primary"  icon="el-icon-edit"  round>开始记录</el-button>
+        </router-link>
         <div class="Avatar">
           <img src="http://q1.qlogo.cn/g?b=qq&nk=2513356652&s=640" alt="假冒伪劣小小Ho">
         </div>

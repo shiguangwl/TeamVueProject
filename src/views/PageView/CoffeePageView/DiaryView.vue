@@ -4,9 +4,7 @@
       <el-col :span="14">
         <div class="DiaryCententBox">
           <el-card style="border-radius: 30px" shadow="hover">
-            <DiaryCommitContent>
-              <el-button>选</el-button>
-            </DiaryCommitContent>
+            <DiaryCommitContent></DiaryCommitContent>
           </el-card>
         </div>
       </el-col>

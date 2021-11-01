@@ -1,38 +1,73 @@
 <template>
   <div class="SubmitItem">
     <i class="el-icon-plus icon-add" :class="{ iconisshow: isexshow }"></i>
-    <textarea class="subtext"  @focus="isexshowfun()" @blur="isexshowfun()" :class="{ isexshow: isexshow }" placeholder="请输入内容..."></textarea>
+    <textarea class="subtext" v-model="contentData"  @focus="isexshowfun()"  :class="{ isexshow: isexshow }" placeholder="请输入内容..."></textarea>
     <div class="toolbarDiv" v-show="toolbarisshow">
       <div class="btn_left">
-        <button class="button_settime"><i class="el-icon-plus"></i><span>设置时间规则</span></button>
+        <button class="button_settime" @click="dialogVisible = !dialogVisible"><i class="el-icon-plus"></i><span>更多选项</span></button>
       </div>
       <div class="btn_middle">
-        <slot></slot>
+<!--        <slot></slot>-->
       </div>
       <div class="btn_right">
-        <el-button round size="small" type="primary" icon="el-icon-edit">提交</el-button>
+        <el-button @click="sub" round size="small" type="primary" icon="el-icon-edit">提交</el-button>
       </div>
     </div>
+  </div>
+  <div class="dialog_box">
+    <el-dialog
+      v-model="dialogVisible"
+      title="更多选项"
+      width="60%"
+    >
+      <slot></slot>
+      <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="dialogVisible = false">取消</el-button>
+        <el-button type="primary" @click="dialogVisible = false"
+        >确定</el-button
+        >
+      </span>
+      </template>
+    </el-dialog>
   </div>
 </template>
 
 <script>
-import { defineComponent, reactive, toRefs } from 'vue'
+import { defineComponent, reactive, toRefs, watch } from 'vue'
+import { todoPro } from '@/utils/api'
 
 export default defineComponent({
   name: 'SubmitItem',
-  setup () {
+  // inject: ['todoMain_LoadData'],
+  emits: ['subAction'],
+  props: {
+    // eslint-disable-next-line no-undef
+    modelValue: String
+  },
+  setup (props, ctx) {
     const state = reactive({
       toolbarisshow: false,
-      isexshow: false
+      isexshow: false,
+      dialogVisible: false,
+      contentData: ''
     })
+    // 提交
+    const sub = () => {
+      ctx.emit('update:modelValue', state.contentData)
+      ctx.emit('subAction')
+      state.contentData = ''
+    }
+    // 是否展开
     const isexshowfun = () => {
       state.isexshow = !state.isexshow
       state.toolbarisshow = !state.toolbarisshow
     }
+
     return {
       ...toRefs(state),
-      isexshowfun
+      isexshowfun,
+      sub
     }
   }
 })

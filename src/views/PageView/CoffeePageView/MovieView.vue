@@ -10,9 +10,6 @@
     </div>
     <div class="bottom">
       <div class="CategoryShowListBox">
-        <VShowBox></VShowBox>
-      </div>
-      <div class="CategoryShowListBox">
         <el-row>
           <el-col :span="20">
             <VShowBox></VShowBox>

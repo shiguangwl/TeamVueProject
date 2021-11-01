@@ -1,5 +1,28 @@
 // 引入axios
 import axios from 'axios'
+import { ElMessage, ElLoading } from 'element-plus'
+
+let loading
+// 内存中正在请求的数量
+let loadingNum = 0
+function startLoading () {
+  if (loadingNum === 0) {
+    loading = ElLoading.service({
+      lock: true,
+      text: '拼命加载中...',
+      background: 'rgba(255,255,255,0.5)'
+    })
+  }
+  // 请求数量加1
+  loadingNum++
+}
+function endLoading () {
+  // 请求数量减1
+  loadingNum--
+  if (loadingNum <= 0) {
+    loading.close()
+  }
+}
 
 // 创建axios实例
 const httpService = axios.create({
@@ -12,12 +35,12 @@ const httpService = axios.create({
 // request拦截器
 httpService.interceptors.request.use(
   config => {
-    // 根据条件加入token-安全携带
-    // eslint-disable-next-line no-constant-condition
-    // if (true) { // 需自定义
-    //   // 让每个请求携带token
-    //   config.headers['User-Token'] = ''
-    // }
+    const token = window.sessionStorage.getItem('token')
+    if (token) { // 需自定义
+      // 让每个请求携带token
+      config.headers.token = token
+    }
+    startLoading()
     return config
   },
   error => {
@@ -27,6 +50,21 @@ httpService.interceptors.request.use(
 )
 
 // respone拦截器
+
+httpService.interceptors.response.use(
+  response => {
+    endLoading()
+    if (response.data.code === 401) {
+      location.href = './login'
+    }
+    return response
+  },
+  error => {
+    // 请求错误处理
+    ElMessage.error('响应异常.')
+    Promise.reject(error)
+  }
+)
 // httpService.interceptors.response.use(
 //   response => {
 //     // 统一处理状态

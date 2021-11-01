@@ -1,19 +1,28 @@
 <template>
   <div class="DiaryCentent">
     <section class="border-2">
-      <article style="font-family:'HYTiaoTiao';">我爸说再敢网恋就打断我的腿，幸好不是胳膊，这样我还能继续<mark style="font-family:'HYTiaoTiao';">和你打字聊天</mark>，就算连胳膊也打断了，我的心里也会有你位置。</article>
-      <address style="font-family: -apple-system,'Helvetica Neue','Helvetica','Tahoma','Arial','PingFang SC',STHeiTi,'Microsoft Yahei';"><time>2021-6-16</time><span>Shinjuku-ku·Cloudy·23℃</span></address>
+      <article style="font-family:'HYTiaoTiao';">{{data.content}}</article>
+<!--      <article style="font-family:'HYTiaoTiao';">{{data.content}}<mark style="font-family:'HYTiaoTiao';">和你打字聊天</mark>，就算连胳膊也打断了，我的心里也会有你位置。</article>-->
+      <address style="font-family: -apple-system,'Helvetica Neue','Helvetica','Tahoma','Arial','PingFang SC',STHeiTi,'Microsoft Yahei';"><time>{{data.fdate}}</time><span>Shinjuku-ku·Cloudy·23℃</span></address>
     </section>
   </div>
 </template>
 
 <script>
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, reactive, toRefs } from 'vue'
 
 export default defineComponent({
   name: 'DiaryCentent',
-  setup () {
-    return {}
+  props: {
+    data: Object
+  },
+  setup (props, ctx) {
+    const state = reactive({
+      data: props.data
+    })
+    return {
+      ...toRefs(state)
+    }
   }
 })
 </script>

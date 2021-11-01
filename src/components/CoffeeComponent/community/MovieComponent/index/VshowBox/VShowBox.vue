@@ -5,25 +5,15 @@
   <div class="VShowBox">
     <span>正在热播</span>
     <div class="ContentList">
-      <VItem></VItem>
-      <VItem></VItem>
-      <VItem></VItem>
-      <VItem></VItem>
-      <VItem></VItem>
-      <VItem></VItem>
-      <VItem></VItem>
-      <VItem></VItem>
-      <VItem></VItem>
-      <VItem></VItem>
-      <VItem></VItem>
-      <VItem></VItem>
+      <VItem :data="item" v-for="item in dataItme" :key="item.url"></VItem>
     </div>
   </div>
 </template>
 
 <script>
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, reactive, toRefs } from 'vue'
 import VItem from '@/components/CoffeeComponent/community/MovieComponent/index/VshowBox/VItem'
+import { VideoData } from '@/utils/api'
 
 export default defineComponent({
   name: 'VShowBox',
@@ -31,7 +21,19 @@ export default defineComponent({
     VItem
   },
   setup () {
-    return {}
+    const state = reactive({
+      dataItme: []
+    })
+
+    const getData = async () => {
+      const { data: res } = await VideoData.GetIndexData()
+      state.dataItme = res
+    }
+    // 初始化数据
+    getData()
+    return {
+      ...toRefs(state)
+    }
   }
 })
 </script>

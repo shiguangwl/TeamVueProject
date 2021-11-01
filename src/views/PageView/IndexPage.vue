@@ -5,12 +5,18 @@
         <el-col :span="20">
           <el-card shadow="always">
             这是顶部Card  待修改   <!--// TODO 待修改-->
+<!--            <h1>{{userInfo.userId}}</h1>-->
+<!--            <h1>{{userInfo.username}}</h1>-->
             <input type="button" @click="logout()" value="登出">
           </el-card>
         </el-col>
       </el-row>
       <router-link :to="{ path: '/settings' }">
         <el-button type="success">个人中心</el-button>
+      </router-link>
+      &nbsp;
+      <router-link :to="{ path: '/whisper' }">
+        <el-button type="success">消息中心</el-button>
       </router-link>
     </div>
     <div class="cards">
@@ -58,8 +64,9 @@
 </template>
 
 <script>
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, reactive, toRefs } from 'vue'
 import { useRouter } from 'vue-router'
+import { UserApi } from '@/utils/api'
 
 export default defineComponent({
   name: 'IndexPage',
@@ -69,8 +76,19 @@ export default defineComponent({
       window.sessionStorage.removeItem('token')
       router.push('/')
     }
+    const state = reactive({
+      userInfo: {}
+    })
+    const getUserInfo = async () => {
+      // TODO 前后端接口待完善
+      const { data: res } = await UserApi.UserInfo()
+      console.log(res.user)
+      state.userInfo = res.user
+    }
+    getUserInfo()
     return {
-      logout
+      logout,
+      ...toRefs(state)
     }
   }
 })

@@ -17,122 +17,46 @@
         </el-dropdown>
       </div>
     </div>
+    <!--   提交组件   -->
     <div class="SubmitItem">
-      <SubmitItem></SubmitItem>
+      <SubmitItem v-model="dataItem.todoCentent" @subAction="submitClick">
+        <slot><input type="text" v-model="dataT"></slot>
+      </SubmitItem>
     </div>
     <div class="Todos">
       <ul>
-        <li>
-          <div class="left"><input type="checkbox" class="tui-checkbox"></div>
-          <div class="middle">
-            <span class="todo_title">我是TODO标题送到附近大理烦得很</span>
-            <span class="todo_des">
+
+        <template v-for="item in dataList.slice().reverse()" :key="item.pkId">
+          <li v-if="item.todoComplete == 0">
+            <div class="left"><input type="checkbox" @click="ChangeTodoStatus(item.pkId, item.todoComplete===1?0:1)" class="tui-checkbox"></div>
+            <div class="middle">
+              <span class="todo_title">{{ item.todoCentent }}</span>
+              <span class="todo_des">
           <i class="el-icon-arrow-down el-icon--right"></i>
           <span>日期时间...</span>
         </span>
-          </div>
-          <div class="right">
-            <a class="#" title="移动到"><i class="el-icon-document-copy"></i></a>
-            <a class="#" title="设置日期"><i class="el-icon-date"></i></a>
-            <a class="#" title="星标"><i class="el-icon-star-off"></i></a>
-          </div>
-        </li>
-        <li>
-          <div class="left"><input type="checkbox" class="tui-checkbox"></div>
-          <div class="middle">
-            <span class="todo_title">我是TODO标题送到附近大理烦得很</span>
-            <span class="todo_des">
-          <i class="el-icon-arrow-down el-icon--right"></i>
-          <span>日期时间...</span>
-        </span>
-          </div>
-          <div class="right">
-            <a class="#" title="移动到"><i class="el-icon-document-copy"></i></a>
-            <a class="#" title="设置日期"><i class="el-icon-date"></i></a>
-            <a class="#" title="星标"><i class="el-icon-star-off"></i></a>
-          </div>
-        </li>
-        <li>
-          <div class="left"><input type="checkbox" class="tui-checkbox"></div>
-          <div class="middle">
-            <span class="todo_title">我是TODO标题送到附近大理烦得很</span>
-            <span class="todo_des">
-          <i class="el-icon-arrow-down el-icon--right"></i>
-          <span>日期时间...</span>
-        </span>
-          </div>
-          <div class="right">
-            <a class="#" title="移动到"><i class="el-icon-document-copy"></i></a>
-            <a class="#" title="设置日期"><i class="el-icon-date"></i></a>
-            <a class="#" title="星标"><i class="el-icon-star-off"></i></a>
-          </div>
-        </li>
-        <li>
-          <div class="left"><input type="checkbox" class="tui-checkbox"></div>
-          <div class="middle">
-            <span class="todo_title">我是TODO标题送到附近大理烦得很</span>
-            <span class="todo_des">
-          <i class="el-icon-arrow-down el-icon--right"></i>
-          <span>日期时间...</span>
-        </span>
-          </div>
-          <div class="right">
-            <a class="#" title="移动到"><i class="el-icon-document-copy"></i></a>
-            <a class="#" title="设置日期"><i class="el-icon-date"></i></a>
-            <a class="#" title="星标"><i class="el-icon-star-off"></i></a>
-          </div>
-        </li>
-        <li>
-          <div class="left"><input type="checkbox" class="tui-checkbox"></div>
-          <div class="middle">
-            <span class="todo_title">我是TODO标题送到附近大理烦得很</span>
-            <span class="todo_des">
-          <i class="el-icon-arrow-down el-icon--right"></i>
-          <span>日期时间...</span>
-        </span>
-          </div>
-          <div class="right">
-            <a class="#" title="移动到"><i class="el-icon-document-copy"></i></a>
-            <a class="#" title="设置日期"><i class="el-icon-date"></i></a>
-            <a class="#" title="星标"><i class="el-icon-star-off"></i></a>
-          </div>
-        </li>
+            </div>
+            <div class="right">
+              <a class="#" title="移动到"><i class="el-icon-document-copy"></i></a>
+              <a class="#" title="设置日期"><i class="el-icon-date"></i></a>
+              <a class="#" title="星标"><i class="el-icon-star-off"></i></a>
+              <a class="#" title="删除" @click="delTodoItem(item.pkId)"><i class="el-icon-delete"></i></a>
+            </div>
+          </li>
+        </template>
       </ul>
     </div>
     <div class="compTodo">
       <div><span>已完成</span></div>
       <div class="comTodoList">
         <ul>
-          <li>
-            <input type="checkbox" class="tui-checkbox" />
-            <a href="#">2021年6月3日10:06</a>
-            <span class="todo_title">我是标题</span>
-          </li>
-          <li>
-            <input type="checkbox" class="tui-checkbox" />
-            <a href="#">2021年6月3日10:06</a>
-            <span class="todo_title">我是标题</span>
-          </li>
-          <li>
-            <input type="checkbox" class="tui-checkbox" />
-            <a href="#">2021年6月3日10:06</a>
-            <span class="todo_title">我是标题</span>
-          </li>
-          <li>
-            <input type="checkbox" class="tui-checkbox" />
-            <a href="#">2021年6月3日10:06</a>
-            <span class="todo_title">我是标题</span>
-          </li>
-          <li>
-            <input type="checkbox" class="tui-checkbox" />
-            <a href="#">2021年6月3日10:06</a>
-            <span class="todo_title">我是标题</span>
-          </li>
-          <li>
-            <input type="checkbox" class="tui-checkbox" />
-            <a href="#">2021年6月3日10:06</a>
-            <span class="todo_title">我是标题</span>
-          </li>
+          <template v-for="item in dataList" :key="item.pkId">
+            <li v-if="item.todoComplete == 1">
+              <input  :checked="true" type="checkbox" class="tui-checkbox" @click="ChangeTodoStatus(item.pkId,item.todoComplete===1?0:1)" />
+              <a href="#">{{item.todoCentent}}</a>
+              <span class="todo_title">{{item.updateTime}}</span>
+            </li>
+          </template>
         </ul>
       </div>
     </div>
@@ -140,16 +64,86 @@
 </template>
 
 <script>
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, reactive, toRefs, watch } from 'vue'
 import SubmitItem from '@/components/TodoComponent/SubmitItem'
+import { todoPro } from '@/utils/api'
+import { ElMessage } from 'element-plus'
 
 export default defineComponent({
   name: 'TodoMianContent',
   components: {
     SubmitItem
   },
-  setup () {
-    return {}
+  props: {
+    // 父组件传递数据
+    dataList: Array
+  },
+  setup (props, ctx) {
+    const state = reactive({
+      dataT: '测试',
+      dataItem: {
+        todoGoupId: 0, // 所属分组
+        todoCentent: '', // 待办内容
+        todoDesc: '', // 待办描述
+        todoStar: 0, // 是否星标
+        todoType: 0, // 待办类型
+        todoComplete: 0, // 是否完成
+        todoTimer: '2-2 0/1 * * * ? ', // 待办周期
+        todoFdate: '2029-10-09 15:19:36' // 结束时间
+      }
+    })
+    // 提交事件
+    const submitClick = async () => {
+      const { data: res } = await todoPro.addTodoItem(state.dataItem)
+      if (res.code === 0) {
+        // 添加刷新列表
+        ctx.emit('loadData')
+        // 重置字段
+        state.dataItem = {
+          todoGoupId: 0, // 所属分组
+          todoCentent: '', // 待办内容
+          todoDesc: '', // 待办描述
+          todoStar: 0, // 是否星标
+          todoType: 0, // 待办类型
+          todoComplete: 0, // 是否完成
+          todoTimer: '2-2 0/1 * * * ? ', // 待办周期
+          todoFdate: '2029-10-09 15:19:36' // 结束时间
+        }
+      }
+    }
+    // 更新Todo状态
+    const ChangeTodoStatus = (pkId, status) => {
+      props.dataList.map(async item => {
+        if (item.pkId === pkId) {
+          const { data: res } = await todoPro.changeStatus(pkId, status)
+          if (res.code === 0) {
+            item.todoComplete = !item.todoComplete
+          }
+          ElMessage({ message: res.msg, type: 'success' })
+        }
+        return item
+      })
+    }
+    // 删除项
+    const delTodoItem = async (pkId) => {
+      // console.log(pkId)
+      const { data: res } = await todoPro.delTodoItem(pkId)
+      if (res.code === 0) {
+        for (var i = 0; i < props.dataList.length; i++) {
+          if (props.dataList[i].pkId === pkId) {
+            // eslint-disable-next-line vue/no-mutating-props
+            props.dataList.splice(i, 1)
+          }
+        }
+      }
+    }
+    return {
+      ...toRefs(state),
+      ...toRefs(props),
+      ChangeTodoStatus,
+      delTodoItem,
+      submitClick
+    }
   }
 })
 </script>

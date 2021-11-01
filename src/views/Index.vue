@@ -22,6 +22,7 @@
 <script>
 import { defineComponent } from 'vue'
 import Navbar from '@/components/Navbar'
+// const Navbar = () => import('@/components/Navbar')
 export default defineComponent({
   name: 'Index',
   components: {
