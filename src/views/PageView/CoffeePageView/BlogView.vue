@@ -2,7 +2,7 @@
   <div class="BlogView">
     <el-card class="box-card" style="width: 75%;overflow: scroll">
       <div class="item" v-for="item in listData.list" :key="item.pkArticleId">
-        <router-link :to="{ path: '/coffee/blog/articleLong-1'+item.pkArticleId }">
+        <router-link :to="{ path: '/coffee/blog/articleLong-'+item.pkArticleId }">
           <div class="item_box">
             <div class="left">
               <img src="https://www.dmoe.cc/random.php" alt="图片">

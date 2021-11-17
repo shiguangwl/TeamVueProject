@@ -1,17 +1,17 @@
 <template>
   <div class="CategorayFilter">
     <ul>
-      <li>
+      <li @click="load()">
         <i class="el-icon-circle-check"></i>
         <span class="span_title">全部</span>
         <span class="span_num">6</span>
       </li>
-      <li>
+      <li @click="load(1)">
         <i class="el-icon-star-off"></i>
         <span class="span_title">星标</span>
         <span class="span_num">4</span>
       </li>
-      <li>
+      <li @click="load(2)">
         <i class="el-icon-date"></i>
         <span class="span_title">今天</span>
         <span class="span_num">5</span>
@@ -26,12 +26,26 @@
 </template>
 
 <script>
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, reactive, toRefs } from 'vue'
 
 export default defineComponent({
   name: 'CategorayFilter',
-  setup () {
-    return {}
+  setup (props, ctx) {
+    const state = reactive({
+      dataList: ''
+    })
+    const load = (type) => {
+      const params = {
+        page: 1,
+        limit: 1000,
+        type: type
+      }
+      ctx.emit('loadData', params)
+    }
+    return {
+      ...toRefs(state),
+      load
+    }
   }
 })
 </script>

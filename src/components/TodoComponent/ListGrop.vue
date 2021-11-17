@@ -4,25 +4,10 @@
       <el-collapse-item title="清单" name="1">
         <div class="ListGorpItems">
           <ul>
-            <li>
+            <li v-for="item in dataList" :key="item.todoGId" @click="loadGroupData(item.todoGId)">
               <span class="Span_CircleColer"></span>
-              <span class="span_title">日常任务</span>
-              <span class="span_num">6</span>
-            </li>
-            <li>
-              <span class="Span_CircleColer"></span>
-              <span class="span_title">学习任务</span>
-              <span class="span_num">4</span>
-            </li>
-            <li>
-              <span class="Span_CircleColer"></span>
-              <span class="span_title">清单1</span>
-              <span class="span_num">4</span>
-            </li>
-            <li>
-              <span class="Span_CircleColer"></span>
-              <span class="span_title">清单2</span>
-              <span class="span_num">4</span>
+              <span class="span_title">{{item.todoGName}}</span>
+              <span class="span_num">:)</span>
             </li>
           </ul>
         </div>
@@ -36,12 +21,26 @@ import { defineComponent, reactive, toRefs } from 'vue'
 
 export default defineComponent({
   name: 'ListGrop',
-  setup () {
+  props: {
+    // 父组件传递数据
+    dataList: Array
+  },
+  setup (props, ctx) {
     const state = reactive({
       activeNames: ['1']
     })
+    const loadGroupData = (groupId) => {
+      const params = {
+        page: 1,
+        limit: 1000,
+        groupId: groupId
+      }
+      ctx.emit('loadData', params)
+    }
     return {
-      ...toRefs(state)
+      ...toRefs(state),
+      ...toRefs(props),
+      loadGroupData
     }
   }
 })

@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import { defineComponent, reactive, ref, toRefs } from 'vue'
+import { defineComponent, reactive, toRefs } from 'vue'
 import { Community } from '@/utils/api'
 import { ElMessage } from 'element-plus'
 export default defineComponent({
@@ -72,6 +72,9 @@ export default defineComponent({
         // 标签
         lables: state.tags.split(',')
 
+      }
+      if (state.syncLog === 'Y') {
+        reqData.hosArticle.articleType = 1
       }
       const { data: res } = await Community.SaveArticle(reqData)
       if (res.code === 0) {

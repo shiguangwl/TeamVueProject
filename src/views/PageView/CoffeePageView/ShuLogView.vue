@@ -5,21 +5,14 @@
         <DiaryNew></DiaryNew>
       </div>
       <div class="post-article">
-        <PostItem></PostItem>
-        <PostItem></PostItem>
-        <PostItem></PostItem>
-        <PostItem></PostItem>
-        <PostItem></PostItem>
-        <PostItem></PostItem>
-        <PostItem></PostItem>
-        <PostItem></PostItem>
-        <PostItem></PostItem>
+        <PostItem :data="item" v-for="item in Articledata.list" :key="item.pkArticleId"></PostItem>
       </div>
-      <el-pagination style="text-align: center"
-                     background
-                     layout="prev, pager, next"
-                     :total="1000">
-      </el-pagination>
+      <el-pagination background layout="prev, pager, next"
+                     v-model:currentPage="Articledata.currPage"
+                     :total=Articledata.totalCount
+                     :page-size=Articledata.pageSize
+                     @current-change="handleCurrentChange"
+      ></el-pagination>
     </div>
     <div class="Right">
       <HotTag></HotTag>
@@ -28,10 +21,12 @@
 </template>
 
 <script>
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, reactive, toRefs } from 'vue'
 import DiaryNew from '@/components/CoffeeComponent/community/DiaryNew'
 import PostItem from '@/components/CoffeeComponent/community/PostItem'
 import HotTag from '@/components/CoffeeComponent/community/HotTag'
+import { Community } from '@/utils/api'
+import { ElMessage } from 'element-plus'
 
 export default defineComponent({
   name: 'ShuLog',
@@ -41,7 +36,34 @@ export default defineComponent({
     HotTag
   },
   setup () {
-    return {}
+    const state = reactive({
+      Articledata: ''
+    })
+    // 获取首页文章
+    const GetindexArticleList = async (params) => {
+      const { data: res } = await Community.IndexArticle(params)
+      if (res.code === 0) {
+        // ElMessage({ message: res.msg, type: 'success' })
+        // 成功
+        state.Articledata = res.page
+      } else {
+        ElMessage(res.msg)
+      }
+    }
+    // 页变更
+    const handleCurrentChange = () => {
+      const params = {
+        page: state.Articledata.currPage,
+        limit: 10
+      }
+      GetindexArticleList(params)
+    }
+    // 初始化加载
+    GetindexArticleList()
+    return {
+      ...toRefs(state),
+      handleCurrentChange
+    }
   }
 })
 </script>

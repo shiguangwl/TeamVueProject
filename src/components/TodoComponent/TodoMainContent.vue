@@ -20,7 +20,35 @@
     <!--   提交组件   -->
     <div class="SubmitItem">
       <SubmitItem v-model="dataItem.todoCentent" @subAction="submitClick">
-        <slot><input type="text" v-model="dataT"></slot>
+        <slot>
+          <el-form
+            label-position="left"
+            label-width="100px"
+            :model="dataItem"
+          >
+            <el-form-item label="所属分组">
+              <el-input v-model="dataItem.todoGoupId"></el-input>
+            </el-form-item>
+            <el-form-item label="待办描述">
+              <el-input v-model="dataItem.todoDesc"></el-input>
+            </el-form-item>
+            <el-form-item label="是否星标">
+              <el-checkbox v-model="dataItem.todoStar" label="星标TDDO项"></el-checkbox>
+            </el-form-item>
+            <el-form-item label="待办类型">
+              <el-input v-model="dataItem.todoType"></el-input>
+            </el-form-item>
+            <el-form-item label="完成状态">
+              <el-input v-model="dataItem.todoComplete"></el-input>
+            </el-form-item>
+            <el-form-item label="待办周期">
+              <el-input v-model="dataItem.todoTimer"></el-input>
+            </el-form-item>
+            <el-form-item label="结束时间">
+              <el-input v-model="dataItem.todoFdate"></el-input>
+            </el-form-item>
+          </el-form>
+        </slot>
       </SubmitItem>
     </div>
     <div class="Todos">
@@ -94,6 +122,7 @@ export default defineComponent({
     })
     // 提交事件
     const submitClick = async () => {
+      state.dataItem.todoStar = state.dataItem.todoStar ? 1 : 0
       const { data: res } = await todoPro.addTodoItem(state.dataItem)
       if (res.code === 0) {
         // 添加刷新列表

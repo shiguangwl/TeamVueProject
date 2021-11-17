@@ -25,7 +25,7 @@
           </div>
           <el-divider></el-divider>
           <div class="ArticleContentBox">
-            <p style="font-family: HYTiaoTiao;">她喜欢的人会是什么样子</p>
+            <p style="font-family: HYTiaoTiao;">{{articleContent.content}}</p>
           </div>
           <div class="like">
             <div class="tag">
@@ -69,10 +69,12 @@
 </template>
 
 <script>
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, onMounted, reactive, toRefs } from 'vue'
 import DiaryNew from '@/components/CoffeeComponent/community/DiaryNew'
 import PostItem from '@/components/CoffeeComponent/community/PostItem'
 import HotTag from '@/components/CoffeeComponent/community/HotTag'
+import { useRoute } from 'vue-router'
+import { Community } from '@/utils/api'
 
 export default defineComponent({
   name: 'ArticleView',
@@ -80,7 +82,19 @@ export default defineComponent({
     HotTag
   },
   setup () {
-    return {}
+    const state = reactive({
+      articleContent: '',
+      text: '# 我是标题'
+    })
+    const route = useRoute()
+    onMounted(async () => {
+      const id = route.params.id
+      const { data: res } = await Community.GetContent(id)
+      state.articleContent = res.hosAcentent
+    })
+    return {
+      ...toRefs(state)
+    }
   }
 })
 </script>

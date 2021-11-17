@@ -1,5 +1,6 @@
 import axios from '@/utils/axiosUtils'
 
+// 用户接口
 export const UserApi = {
   // 登录接口
   Login: (params) => {
@@ -18,18 +19,20 @@ export const UserApi = {
     const params = {
       userId
     }
-    return await axios.get('/api/user/info', params)
+    // TODO 待修改
+    return await axios.get('/api/community/hosarticle/userinfo', params)
   }
 }
 
+// 待办接口
 export const todoPro = {
   // 获取TODO列表
   todoList: (params) => {
     // ?t=1633763393350&page=1&limit=10
-    params = {
-      page: 1,
-      limit: 1000
-    }
+    // params = {
+    //   page: 1,
+    //   limit: 1000
+    // }
     return axios.get('/api/todoPro/todocontent/list', params)
   },
   // 更新TODO状态
@@ -40,19 +43,58 @@ export const todoPro = {
     }
     return axios.get('/api/todoPro/todocontent/updatestatus', params)
   },
+  // 添加待办
   addTodoItem: (params) => {
     return axios.post('/api/todoPro/todocontent/save', params)
   },
+  // 删除待办
   delTodoItem: (pkId) => {
     const params = {
       pkId
     }
     return axios.get('/api/todoPro/todocontent/delete', params)
+  },
+  // 获取待办分组
+  todoGroupList: (params) => {
+    // ?t=1633763393350&page=1&limit=10
+    params = {
+      page: 1,
+      limit: 1000
+    }
+    return axios.get('/api/todoPro/todogroup/list', params)
   }
 }
 
 // 社区接口
 export const Community = {
+  // 获取首页文章
+  IndexArticle: (params) => {
+    // if (params) {
+    //   params = {
+    //     page: 1,
+    //     limit: 10
+    //   }
+    // }
+
+    return axios.get('/api/community/hosindex/article', params)
+  },
+  // 取首页日记
+  Indexdiary: (params) => {
+    // if (params) {
+    //   params = {
+    //     page: 1,
+    //     limit: 10
+    //   }
+    // }
+
+    return axios.get('/api/community/hosindex/diary', params)
+  },
+  /**
+   * 获取文章列表
+   * @param params
+   * @returns {Promise | Promise<unknown>}
+   * @constructor
+   */
   GetPost: (params) => {
     // if (params) {
     //   params = {
@@ -63,6 +105,7 @@ export const Community = {
 
     return axios.get('/api/community/hosarticle/list', params)
   },
+  // 获取文章内容
   GetContent: (articlId) => {
     // const params = {
     //   articlId

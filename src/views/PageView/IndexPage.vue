@@ -5,8 +5,8 @@
         <el-col :span="20">
           <el-card shadow="always">
             这是顶部Card  待修改   <!--// TODO 待修改-->
-<!--            <h1>{{userInfo.userId}}</h1>-->
-<!--            <h1>{{userInfo.username}}</h1>-->
+            <h1>{{userInfo.userId}}</h1>
+            <h1>{{userInfo.username}}</h1>
             <input type="button" @click="logout()" value="登出">
           </el-card>
         </el-col>
@@ -67,6 +67,7 @@
 import { defineComponent, reactive, toRefs } from 'vue'
 import { useRouter } from 'vue-router'
 import { UserApi } from '@/utils/api'
+import store from '@/store/index'
 
 export default defineComponent({
   name: 'IndexPage',
@@ -82,8 +83,8 @@ export default defineComponent({
     const getUserInfo = async () => {
       // TODO 前后端接口待完善
       const { data: res } = await UserApi.UserInfo()
-      console.log(res.user)
       state.userInfo = res.user
+      store.state.userInfo = state.userInfo
     }
     getUserInfo()
     return {

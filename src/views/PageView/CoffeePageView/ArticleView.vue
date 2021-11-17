@@ -5,7 +5,6 @@
         <h3>我是标题</h3>
         <span>2021-10-18 10:49</span>
       </div>
-<!--      {{articleContent}}-->
       <v-md-editor v-model="text" height="100%"  mode="preview"></v-md-editor>
     </div>
     <el-affix :offset="70">

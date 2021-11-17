@@ -7,61 +7,16 @@
     <div class="Content">
       <div class="ImageList">
         <ul>
-          <li>
+          <li v-for="item in Diarydata.list" :key="item.pkId">
+            <router-link :to="{ path: '/coffee/shulog/article-diary' + item.pkId }">
               <img src="https://i.loli.net/2020/12/06/fHo7K5XUrBb6DGy.png" alt="图片">
               <div class="info">
                 <img src="https://i.loli.net/2020/11/25/WXB6eCpMZkwh7PD.png" alt="">
-                <span>日记1</span>
+                <span style="white-space: nowrap;/*一行显示*/
+overflow: hidden;/*超出部分隐藏*/
+text-overflow: ellipsis;/*用...代替超出部分*/">{{ item.content }}</span>
               </div>
-          </li>
-          <li>
-            <img src="https://i.loli.net/2020/12/06/fHo7K5XUrBb6DGy.png" alt="图片">
-            <div class="info">
-              <img src="https://i.loli.net/2020/11/25/WXB6eCpMZkwh7PD.png" alt="">
-              <span>日记2</span>
-            </div>
-          </li>
-          <li>
-            <img src="https://i.loli.net/2020/12/06/fHo7K5XUrBb6DGy.png" alt="图片">
-            <div class="info">
-              <img src="https://i.loli.net/2020/11/25/WXB6eCpMZkwh7PD.png" alt="">
-              <span>日记3</span>
-            </div>
-          </li>
-          <li>
-            <img src="https://i.loli.net/2020/12/06/fHo7K5XUrBb6DGy.png" alt="图片">
-            <div class="info">
-              <img src="https://i.loli.net/2020/11/25/WXB6eCpMZkwh7PD.png" alt="">
-              <span>日记3</span>
-            </div>
-          </li>
-          <li>
-            <img src="https://i.loli.net/2020/12/06/fHo7K5XUrBb6DGy.png" alt="图片">
-            <div class="info">
-              <img src="https://i.loli.net/2020/11/25/WXB6eCpMZkwh7PD.png" alt="">
-              <span>日记4</span>
-            </div>
-          </li>
-          <li>
-            <img src="https://i.loli.net/2020/12/06/fHo7K5XUrBb6DGy.png" alt="图片">
-            <div class="info">
-              <img src="https://i.loli.net/2020/11/25/WXB6eCpMZkwh7PD.png" alt="">
-              <span>标题</span>
-            </div>
-          </li>
-          <li>
-            <img src="https://i.loli.net/2020/12/06/fHo7K5XUrBb6DGy.png" alt="图片">
-            <div class="info">
-              <img src="https://i.loli.net/2020/11/25/WXB6eCpMZkwh7PD.png" alt="">
-              <span>标题</span>
-            </div>
-          </li>
-          <li>
-            <img src="https://i.loli.net/2020/12/06/fHo7K5XUrBb6DGy.png" alt="图片">
-            <div class="info">
-              <img src="https://i.loli.net/2020/11/25/WXB6eCpMZkwh7PD.png" alt="">
-              <span>标题</span>
-            </div>
+              </router-link>
           </li>
         </ul>
       </div>
@@ -70,12 +25,38 @@
 </template>
 
 <script>
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, reactive, toRefs } from 'vue'
+
+import { Community } from '@/utils/api'
+import { ElMessage } from 'element-plus'
 
 export default defineComponent({
   name: 'DiaryNew',
   setup () {
-    return {}
+    const state = reactive({
+      Diarydata: ''
+    })
+    // 获取首页日记
+    const GetindexDiaryList = async () => {
+      // 取最新修改
+      const params = {
+        page: 1,
+        limit: 8
+      }
+      const { data: res } = await Community.Indexdiary(params)
+      if (res.code === 0) {
+        // ElMessage({ message: res.msg, type: 'success' })
+        // 成功
+        state.Diarydata = res.page
+      } else {
+        ElMessage(res.msg)
+      }
+    }
+    // 初始化
+    GetindexDiaryList()
+    return {
+      ...toRefs(state)
+    }
   }
 })
 </script>

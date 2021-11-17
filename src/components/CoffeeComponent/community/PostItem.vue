@@ -4,10 +4,9 @@
       <img src="https://avatar.is.fail/avatar/92ceb0b9df8a2753af61cf94adcdd186?&s=100" alt="">
       <span>TimeHo</span>
     </div>
-    <router-link :to="{ path: '/coffee/shulog/article-10' }">
+    <router-link :to="{ path: '/coffee/shulog/article-'+data.pkArticleId }">
     <div class="content">
-      我是这个动态的内容我是这个动态的内容我是这个动态的内容我是这个动态的内容我是这个动态的内容
-      我是这个动态的内容我是这个动态的内容我是这个动态的内容我是这个动态的内容我是这个动态的内容
+      {{ data.articleMiniCentent }}
     </div>
     </router-link>
     <div class="like">
@@ -17,18 +16,22 @@
       <div class="btns">
         <div class="btn">
           <i class="iconfont icon-wenjian"></i>
-          123
+        <!--    点赞      -->
+          {{ data.articleLikeCount }}
         </div>
         <div class="btn">
           <i class="iconfont icon-wenjian"></i>
-          123
+<!--          评论数           -->
+          {{ data.articleCommentCount }}
         </div>
         <div class="btn">
           <i class="iconfont icon-wenjian"></i>
-          123
+<!--          浏览量         -->
+          {{ data.articleLikeCount }}
         </div>
         <div class="btn">
           <i class="iconfont icon-wenjian"></i>
+<!--          发布时间            -->
           9天前
         </div>
       </div>
@@ -37,12 +40,20 @@
 </template>
 
 <script>
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, reactive, toRefs } from 'vue'
 
 export default defineComponent({
   name: 'PostItem',
-  setup () {
-    return {}
+  props: {
+    data: Object
+  },
+  setup (props, ctx) {
+    const state = reactive({
+      data: props.data
+    })
+    return {
+      ...toRefs(state)
+    }
   }
 })
 </script>

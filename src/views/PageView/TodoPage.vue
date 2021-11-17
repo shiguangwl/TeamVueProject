@@ -2,8 +2,8 @@
   <div class="TodoPage">
 <!--    左侧筛选 div   filter 和 ListGraop-->
     <div class="LeftMange">
-      <CategorayFilter></CategorayFilter>
-      <ListGrop></ListGrop>
+      <CategorayFilter  @loadData="getTodoProList"></CategorayFilter>
+      <ListGrop :dataList="GroupDataList"  @loadData="getTodoProList"></ListGrop>
     </div>
 <!--    主要内容显示区域-->
     <div class="RightContent">
@@ -12,7 +12,7 @@
         <TodoMainHeader></TodoMainHeader>
       </div>
       <div class="TodoContent">
-        <TodoMainContent :dataList="dataList" @loadData="getTodoProList()"></TodoMainContent>
+        <TodoMainContent :dataList="dataList" @loadData="getTodoProList"></TodoMainContent>
       </div>
     </div>
   </div>
@@ -36,15 +36,26 @@ export default defineComponent({
   },
   setup () {
     const state = reactive({
-      dataList: []
+      dataList: [],
+      GroupDataList: []
     })
     // 请求获取待办
-    const getTodoProList = async () => {
-      const { data: res } = await todoPro.todoList()
+    const getTodoProList = async (params) => {
+      // const params = {
+      //   page: 1,
+      //   limit: 1000
+      // }
+      const { data: res } = await todoPro.todoList(params)
       state.dataList = res.page.list
+    }
+    // 请求分组列表
+    const getTodoGroupList = async () => {
+      const { data: res } = await todoPro.todoGroupList()
+      state.GroupDataList = res.page.list
     }
     // 初始化
     getTodoProList()
+    getTodoGroupList()
     return {
       ...toRefs(state),
       getTodoProList
