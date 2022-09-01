@@ -1,3 +1,4 @@
+<!--影视播放页面-->
 <template>
   <div class="PlayView">
     <div class="top">
@@ -5,23 +6,29 @@
         <el-col :span="18">
           <div class="Left">
             <div class="PlayBox">
-              <PlayContainer></PlayContainer>
+              <div class="PlayContainer">
+                <iframe id="playbox"
+                        :src="jiexi+playUrl"
+                        allowfullscreen="true"
+                        frameborder="0" width="100%"
+                        height="100%" scrolling="No"
+                        leftmargin="0" topmargin="0">
+                </iframe>
+              </div>
             </div>
             <div class="info">
               <div class="titlediv">
-                <span>斗罗大陆 第01集</span>
+                <span>{{data.title}}</span>
               </div>
               <div class="tagdiv">
-                <el-tag type="info">电视剧</el-tag>
-                <el-tag type="info">奇幻</el-tag>
-                <el-tag type="info">中国/大陆</el-tag>
+                <el-tag type="info" v-for="i in data.moviecategory" :key="i">{{i}}</el-tag>
               </div>
             </div>
           </div>
         </el-col>
         <el-col :span="6">
           <div class="Right">
-            <PlaySource></PlaySource>
+            <PlaySource :sourceData="allepidetail" @changePlay="changePlay"></PlaySource>
           </div>
         </el-col>
       </el-row>
@@ -33,20 +40,48 @@
 </template>
 
 <script>
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, onActivated, reactive, toRefs } from 'vue'
 import VShowBox from '@/components/CoffeeComponent/community/MovieComponent/index/VshowBox/VShowBox'
 import PlayContainer from '@/components/CoffeeComponent/community/MovieComponent/index/PlayPage/PlayContainer'
 import PlaySource from '@/components/CoffeeComponent/community/MovieComponent/index/PlayPage/PlaySource'
-
+import { useRoute } from 'vue-router'
+import { VideoData } from '@/utils/api'
 export default defineComponent({
   name: 'PlayView',
   components: {
     VShowBox,
-    PlayContainer,
     PlaySource
   },
   setup () {
-    return {}
+    const state = reactive({
+      data: '',
+      VCid: '',
+      Vid: '',
+      playUrl: '',
+      jiexi: 'https://jx.parwix.com:4433/player/?url=',
+      allepidetail: {}
+    })
+    const route = useRoute()
+    onActivated(async () => {
+      const param = route.params.id.split('&')
+      state.VCid = param[0]
+      state.Vid = param[1]
+      const params = {
+        cat: state.VCid,
+        id: state.Vid
+      }
+      const { data: res } = await VideoData.GetDetailInfo(params)
+      state.data = res.data
+      state.allepidetail = state.data.allepidetail
+      state.playUrl = state.allepidetail[Object.keys(state.allepidetail)[0]][0].url
+    })
+    const changePlay = (url) => {
+      state.playUrl = url
+    }
+    return {
+      ...toRefs(state),
+      changePlay
+    }
   }
 })
 </script>
@@ -78,5 +113,10 @@ export default defineComponent({
         height: 100%;
       }
     }
+  }
+  .PlayContainer{
+    background-color: #1B9AEE;
+    width: 100%;
+    height: 560px;
   }
 </style>

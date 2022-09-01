@@ -8,7 +8,7 @@ module.exports = {
     // 配置代理实现跨域
     proxy: {
       '/api': {
-        target: 'http://localhost:8080/renren-fast', // API服务器的地址
+        target: 'http://localhost:8866/renren-fast', // API服务器的地址
         changeOrigin: true,
         pathRewrite: {
           '^/api': ''

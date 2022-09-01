@@ -1,7 +1,7 @@
 <template>
   <div class="PostItem">
     <div class="info">
-      <img src="https://avatar.is.fail/avatar/92ceb0b9df8a2753af61cf94adcdd186?&s=100" alt="">
+      <img v-lazy="'https://avatar.is.fail/avatar/92ceb0b9df8a2753af61cf94adcdd186?&s=100'" alt="">
       <span>TimeHo</span>
     </div>
     <router-link :to="{ path: '/coffee/shulog/article-'+data.pkArticleId }">
@@ -20,7 +20,7 @@
           {{ data.articleLikeCount }}
         </div>
         <div class="btn">
-          <i class="iconfont icon-wenjian"></i>
+          <i class="font icon-wenjian"></i>
 <!--          评论数           -->
           {{ data.articleCommentCount }}
         </div>

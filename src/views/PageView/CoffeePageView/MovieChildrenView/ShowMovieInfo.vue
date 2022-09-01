@@ -1,5 +1,6 @@
+<!--影视详情页面-->
 <template>
-  <div class="ShowMovieInfo">
+  <div class="ShowMovieInfo" id="ShowMovieInfoTop">
     <div class="top">
       <div class="MoveShowInfoBox">
         <MoveShowInfo></MoveShowInfo>

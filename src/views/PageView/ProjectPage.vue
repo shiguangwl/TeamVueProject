@@ -12,7 +12,7 @@
         <div class="starProject">
           <div class="mycard">
             <router-link :to="{ path: '/project/0000/arrange' }">
-              <img src="https://tcs-ga.teambition.net/thumbnail/111w845f039e35d0793c36f4b019be54a3af/w/600/h/300" alt="">
+              <img v-lazy="'https://tcs-ga.teambition.net/thumbnail/111w845f039e35d0793c36f4b019be54a3af/w/600/h/300'" alt="">
               <span>个人安排</span>
             </router-link>
           </div>
@@ -20,7 +20,7 @@
         <h3>所有项目</h3>
         <div class="allProject">
           <div class="mycard">
-            <img src="https://tcs-ga.teambition.net/thumbnail/111w845f039e35d0793c36f4b019be54a3af/w/600/h/300" alt="">
+            <img v-lazy="'https://tcs-ga.teambition.net/thumbnail/111w845f039e35d0793c36f4b019be54a3af/w/600/h/300'" alt="">
             <span>个人安排</span>
           </div>
           <div class="mycard" style="text-align: center;background-color: #BFBFBF">

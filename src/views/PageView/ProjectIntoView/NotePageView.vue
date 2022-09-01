@@ -3,14 +3,14 @@
     <div class="LeftList">
       <MultilevelDirectory></MultilevelDirectory>
     </div>
-    <div class="RightMain">
-      RightMain
+    <div class="RightMain" style="padding: 20px">
+      <v-md-editor ref="preview" v-model="text" height="100%"  mode="preview"></v-md-editor>
     </div>
   </div>
 </template>
 
 <script>
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, reactive, toRef, toRefs } from 'vue'
 import MultilevelDirectory from '@/components/MultilevelDirectory'
 export default defineComponent({
   name: 'NotePageView',
@@ -18,7 +18,14 @@ export default defineComponent({
     MultilevelDirectory
   },
   setup () {
-    return {}
+    const state = reactive({
+      text: '# 当前页面待开发~~~:fist_raised:' +
+        '\n' +
+        '项目笔记整理,实现分类归纳整理,可同步到博客:fist_raised::airplane::anchor::black_nib:'
+    })
+    return {
+      ...toRefs(state)
+    }
   }
 })
 </script>

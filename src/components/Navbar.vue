@@ -3,7 +3,7 @@
 <!--    navbar功能列表显示-->
     <div class="navbar_header">
       <router-link :to="{path: '/index'}">
-        <img src="http://q1.qlogo.cn/g?b=qq&nk=2513356652&s=640" class="avatar">
+        <img v-lazy="'http://q1.qlogo.cn/g?b=qq&nk=2513356652&s=640'" class="avatar">
       </router-link>
       <ul class="fun_list">
         <li v-for="(item, index) in funList" :key="index">
@@ -24,7 +24,7 @@
     <div class="navbar_tool">
       <ul class="fun_list">
         <li>
-          <a href="#"><img src="http://q1.qlogo.cn/g?b=qq&nk=2513356652&s=640"></a>
+          <a href="#"><img v-lazy="'http://q1.qlogo.cn/g?b=qq&nk=2513356652&s=640'"></a>
           <span>首页1</span>
         </li>
       </ul>
@@ -45,25 +45,30 @@ export default defineComponent({
           title: '待办',
           routeTo: { path: '/todo' }
         },
-        {
-          icon: '#icon-xiangmu',
-          title: '项目',
-          routeTo: { path: '/project' }
-        },
+        // {
+        //   icon: '#icon-xiangmu',
+        //   title: '项目',
+        //   routeTo: { path: '/project' }
+        // },
         {
           icon: '#icon-rili',
           title: '日历',
           routeTo: { path: '/calendar' }
         },
-        {
-          icon: '#icon-010-file',
-          title: '网盘',
-          routeTo: { path: '/files' }
-        },
+        // {
+        //   icon: '#icon-010-file',
+        //   title: '网盘',
+        //   routeTo: { path: '/files' }
+        // },
         {
           icon: '#icon-COFFEESHOP',
           title: '咖啡厅',
           routeTo: { path: '/coffee' }
+        },
+        {
+          icon: '#icon-COFFEESHOP',
+          title: '小工具',
+          routeTo: { path: '/utool' }
         }
       ]
     })

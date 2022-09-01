@@ -1,50 +1,18 @@
 <template>
-  <div class="communicationView">
+  <div class="communicationView" style="background-image: url('https://s1.hdslb.com/bfs/static/blive/blfe-dynamic-web/static/img/background.bc725153.png')">
     <div class="wrapper">
-      <div class="container">
+      <div class="container" style="background-color: rgba(241,232,232,0.71);border-radius: 10px">
         <div class="left">
           <div class="top">
             <input type="text" placeholder="搜索" />
             <a href="javascript:;" class="search"></a>
           </div>
           <ul class="people">
-            <li class="person" data-chat="person1">
-              <img src="imgs/thomas.jpg" alt="" />
-              <span class="name">大力水手</span>
+            <li class="person" v-for="item in friendLis.list" :key='item.friendUserId' @click="clickUserOpenWindow(item.friendUserId)">
+              <img src="http://q1.qlogo.cn/g?b=qq&nk=2513356652&s=640" alt="" />
+              <span class="name">{{item.friendUserName}}</span>
               <span class="time">2:09 PM</span>
-              <span class="preview">我想知道...</span>
-            </li>
-            <li class="person" data-chat="person2">
-              <img src="imgs/dog.png" alt="" />
-              <span class="name">在东北玩泥巴</span>
-              <span class="time">1:44 PM</span>
-              <span class="preview">我以前被遗忘的感觉</span>
-            </li>
-            <li class="person" data-chat="person3">
-              <img src="imgs/louis-ck.jpeg" alt="" />
-              <span class="name">来爆一个傻佬</span>
-              <span class="time">2:09 PM</span>
-              <span class="preview">但我们可能需要一个新的地毯.</span>
-            </li>
-            <li class="person" data-chat="person4">
-              <img src="imgs/bo-jackson.jpg" alt="" />
-              <span class="name">呼呼呼</span>
-              <span class="time">2:09 PM</span>
-              <span class="preview">还好吧，情况不是很坏...</span>
-            </li>
-            <li class="person" data-chat="person5">
-              <img src="imgs/michael-jordan.jpg" alt="" />
-              <span class="name">L梦の鱼</span>
-              <span class="time">2:09 PM</span>
-              <span class="preview">
-                            生活有度，人生添寿
-                        </span>
-            </li>
-            <li class="person" data-chat="person6">
-              <img src="imgs/drake.jpg" alt="" />
-              <span class="name">Drake</span>
-              <span class="time">2:09 PM</span>
-              <span class="preview">真理惟一可靠的标准就是永远自相符合</span>
+              <span class="preview">新消息...</span>
             </li>
           </ul>
         </div>
@@ -63,121 +31,50 @@
             <div class="bubble you">
               我想知道...
             </div>
-          </div>
-          <div class="chat" data-chat="person2">
-            <div class="conversation-start">
-              <span>今天, 5:38 PM</span>
+            <div class="bubble me">
+              我想知道...
             </div>
             <div class="bubble you">
-              在不在, 能不能听我一次?
-            </div>
-            <div class="bubble you">
-              我在加州
+              我想知道...
             </div>
             <div class="bubble me">
-              ... 关于我们的关系。
-
+              我想知道...
+            </div>
+            <div class="bubble you">
+              我想知道...
             </div>
             <div class="bubble me">
-              你是认真的
-              ?
+              我想知道...
             </div>
             <div class="bubble you">
-              当我们是年轻和自由
-              ...
-            </div>
-            <div class="bubble you">
-              我以前被遗忘的感觉
-
-            </div>
-          </div>
-          <div class="chat" data-chat="person3">
-            <div class="conversation-start">
-              <span>今天, 3:38 AM</span>
-            </div>
-            <div class="bubble you">
-              Hey哥们!
-            </div>
-            <div class="bubble you">
-              嗯……我在走廊上踩到了狗屎。
-
+              我想知道...
             </div>
             <div class="bubble me">
-              ... 什么？.
+              我想知道...
+            </div>
+            <div class="bubble you">
+              我想知道...
             </div>
             <div class="bubble me">
-              你是来搞笑的?
+              我想知道...
             </div>
             <div class="bubble you">
-              我想想...
-            </div>
-            <div class="bubble you">
-              简直是糟糕的一天...
-            </div>
-            <div class="bubble you">
-              但我们可能需要一个新的地毯。
-
-            </div>
-          </div>
-          <div class="chat" data-chat="person4">
-            <div class="conversation-start">
-              <span>昨天, 4:20 PM</span>
-            </div>
-            <div class="bubble you">
-              妹的
-            </div>
-            <div class="bubble you">
-
-              简直是糟糕的一天...
+              我想知道...
             </div>
             <div class="bubble me">
-              ... 什么？.
-
+              我想知道...
+            </div>
+            <div class="bubble you">
+              我想知道...
             </div>
             <div class="bubble me">
-
-              嗯……我在走廊上踩到了狗屎。
+              我想知道...
             </div>
             <div class="bubble you">
-
-              你是来搞笑的?
-            </div>
-
-          </div>
-          <div class="chat" data-chat="person5">
-            <div class="conversation-start">
-              <span>今天, 6:28 AM</span>
-            </div>
-            <div class="bubble you">
-              醒醒
-            </div>
-            <div class="bubble you">
-              醒醒
-            </div>
-            <div class="bubble you">
-              我需要三件东西：爱情友谊和图书。然而这三者之间何其相通！炽热的爱情可以充实图书的内容，图书又是人们最忠实的朋友
-            </div>
-          </div>
-          <div class="chat" data-chat="person6">
-            <div class="conversation-start">
-              <span>星期五, 1:27 PM</span>
-            </div>
-            <div class="bubble you">
-              你手机怎么了
-            </div>
-            <div class="bubble you">
-              你终于有一个智能手机:D
-
+              我想知道...
             </div>
             <div class="bubble me">
-              Drake?
-            </div>
-            <div class="bubble me">
-              你为什么不回答?
-
-            </div>
-            <div class="bubble you">
-              生活有度，人生添寿
+              我想知道...
             </div>
           </div>
           <div class="write">
@@ -194,17 +91,39 @@
 </template>
 
 <script>
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, onActivated, reactive, toRefs } from 'vue'
+import { Communication } from '@/utils/api'
 
 export default defineComponent({
   name: 'communicationView',
   setup () {
-    return {}
+    onActivated(() => {
+      console.log('in')
+    })
+    const state = reactive({
+      friendLis: ''
+    })
+    const getFriendlist = async () => {
+      const { data: res } = await Communication.GetFriendlist()
+      state.friendLis = res.page
+    }
+    const clickUserOpenWindow = (userId) => {
+      console.log(userId)
+    }
+    getFriendlist()
+    return {
+      ...toRefs(state),
+      clickUserOpenWindow
+    }
   }
 })
 </script>
 
 <style lang="scss" scoped>
+.communicationView{
+  //background-color: #F0F0F0;
+}
+
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}table{border-collapse:collapse;border-spacing:0}
 *, *:before, *:after {
   box-sizing: border-box;
@@ -244,7 +163,7 @@ body {
 
 .container {
   position: relative;
-  top: 50%;
+  top: 40%;
   left: 50%;
   width: 80%;
   height: 75%;
@@ -400,13 +319,10 @@ body {
 }
 .container .right .chat {
   position: relative;
-  display: none;
-  overflow: hidden;
-  padding: 0 35px 92px;
-  border-width: 1px 1px 1px 0;
-  border-style: solid;
+  overflow-y: scroll;
+  padding: 0 35px;
   border-color: var(--light);
-  height: calc(100% - 48px);
+  height: 80%;
   justify-content: flex-end;
   flex-direction: column;
 }
@@ -535,14 +451,14 @@ body {
 .container .right .bubble.you {
   float: left;
   color: var(--white);
-  background-color: var(--blue);
+  background-color: #6bd0fd;
   align-self: flex-start;
   -webkit-animation-name: slideFromLeft;
   animation-name: slideFromLeft;
 }
 .container .right .bubble.you:before {
   left: -3px;
-  background-color: var(--blue);
+  background-color: #6bd0fd;
 }
 .container .right .bubble.me {
   float: right;

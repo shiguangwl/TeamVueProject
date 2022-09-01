@@ -2,7 +2,7 @@
   <div class="MovieView">
     <div class="top">
       <div class="logo">
-        <img src="https://cdn.jsdelivr.net/gh/imdianying/im@2021032601/statics/images/index-logo.png" alt="">
+        <img v-lazy="'https://cdn.jsdelivr.net/gh/imdianying/im@2021032601/statics/images/index-logo.png'" alt="">
       </div>
       <div class="SearchBox">
         <VSearch></VSearch>
@@ -10,13 +10,11 @@
     </div>
     <div class="bottom">
       <div class="text">
-        <div><span class="t1">穿越火线</span></div>
-        <div><span class="t2">搜索"穿越火线" ，找到 6部影视作品</span></div>
+        <div><span class="t1">{{ Kw }}</span></div>
+        <div><span class="t2">搜索"{{Kw}}" ，找到 {{rows.length}}部影视作品</span></div>
       </div>
-      <StoPlayInfo></StoPlayInfo>
-      <StoPlayInfo></StoPlayInfo>
-      <StoPlayInfo></StoPlayInfo>
-      <StoPlayInfo></StoPlayInfo>
+<!--      搜索结果      -->
+      <StoPlayInfo v-for="item in rows" :key="item" :data="item"></StoPlayInfo>
     </div>
     <div class="foot">
       <div class="more">
@@ -28,9 +26,11 @@
 </template>
 
 <script>
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, onActivated, reactive, toRefs, watch } from 'vue'
 import VSearch from '@/components/CoffeeComponent/community/MovieComponent/index/VSearch'
 import StoPlayInfo from '@/components/CoffeeComponent/community/MovieComponent/index/MoveShowInfo/StoPlayInfo'
+import { useRoute } from 'vue-router'
+import { VideoData } from '@/utils/api'
 export default defineComponent({
   name: 'MovieView',
   components: {
@@ -38,7 +38,28 @@ export default defineComponent({
     StoPlayInfo
   },
   setup () {
-    return {}
+    const state = reactive({
+      data: '',
+      Kw: '',
+      rows: []
+    })
+    // onActivated(() => {
+    //   loadData()
+    // })
+    const route = useRoute()
+    const loadData = async () => {
+      state.Kw = route.params.id
+      const { data: res } = await VideoData.GetSearchData(state.Kw)
+      state.data = res.data
+      state.rows = res.data.longData.rows
+    }
+    watch(() => route.path, () => {
+      loadData()
+    })
+    loadData()
+    return {
+      ...toRefs(state)
+    }
   }
 })
 </script>

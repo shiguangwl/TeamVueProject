@@ -34,7 +34,35 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
+<style scoped  lang="scss">
+  .HeaderBox{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 3.4rem;
+  padding: 0 3rem;
+  box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%);
+  .HeaderLeftBox{
+    font-size: 1.3rem;
+    font-weight: 500;
+  }
+  .Avatar_info{
+    display: flex;
+    align-items: center;
+    .Avatar{
+      img{
+        width: 100%;
+        height: 100%;
+      }
+      width: 45px;
+      height: 45px;
+    }
+    i{
+      font-size: 20px;
+      cursor: pointer;
+    }
+  }
+}
   .main{
     display: flex;
     width: 100%;

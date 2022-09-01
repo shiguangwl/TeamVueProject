@@ -41,21 +41,16 @@ export default defineComponent({
     })
     // 请求获取待办
     const getTodoProList = async (params) => {
-      // const params = {
-      //   page: 1,
-      //   limit: 1000
-      // }
-      const { data: res } = await todoPro.todoList(params)
-      state.dataList = res.page.list
-    }
-    // 请求分组列表
-    const getTodoGroupList = async () => {
-      const { data: res } = await todoPro.todoGroupList()
-      state.GroupDataList = res.page.list
+      // const { data: res } = await todoPro.todoList(params)
+      // state.dataList = res.page.list
     }
     // 初始化
-    getTodoProList()
-    getTodoGroupList()
+    const params = {
+      page: 1,
+      limit: 1000
+    }
+    // 获取后端数据
+    getTodoProList(params)
     return {
       ...toRefs(state),
       getTodoProList

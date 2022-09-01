@@ -4,21 +4,23 @@
     <div id="topbar" class="topbar">
       <div class="toppic">
         <div class="topside">
-          <a href="#" class="logoLink" ></a>
+          <a href="#" class="logoLink" >
+            TimePro
+          </a>
           <ul id="topNav" class="topNav">
             <li class="current"><a href="#">首页</a></li>
-            <li class=""><a href="#">下载</a></li>
-            <li class=""><a href="#">动态</a></li>
+            <li class=""><a href="#">关于</a></li>
+<!--            <li class=""><a href="#">动态</a></li>-->
           </ul>
         </div>
         <div class="topTool">
-          <a class="barzc" href="#">注册</a>
+          <a class="barzc" href="/login">注册</a>
           <ul style="padding-top: 15px;">
             <li>
               <a href="./login">登录</a>
             </li>
-            <li><a href="#" >QQ安全</a></li>
-            <li><a href="#">QQ会员</a></li>
+<!--            <li><a href="#" >QQ安全</a></li>-->
+<!--            <li><a href="#">QQ会员</a></li>-->
           </ul>
         </div>
       </div>
@@ -27,37 +29,43 @@
       <ul id="crossbanenr">
         <li class="pcqq">
           <div class="tim-content qqpc">
-            <div class="tim-content_title">
-              <div class="title-text"></div>
+            <div class="tim-content_title" style="display: flex;">
+              <div class="title-text">
+                <h1>高效生活</h1>
+                <h6>你的自我提升助手</h6>
+                <span style="width: 250px;display: block;font-size: 14px;color: #323c55;text-align: justify;line-height: 24px;margin-top: 20px;font-family: PingFang SC;">
+                  一个简单且好用的待办清单,一个充满志同道合朋友的社区,一个影视大全,轻松记录要做的事,高效生活
+                </span>
+              </div>
               <div class="title-btn">
-                <a href="#" target="_blank" ></a>
+                <video id="video" src="//cloud.video.taobao.com/play/u/1458252/p/1/e/6/t/1/291939960010.mp4" autoplay="autoplay" loop="loop" muted="muted" height="100%" width="100%" ></video>
               </div>
             </div>
-            <img src="images/pc-feture.png" alt="" class="tim-img">
+<!--            <img src="images/pc-feture.png" alt="" class="tim-img">-->
           </div>
         </li>
       </ul>
     </div>
     <div class="content">
-      <h1>I'm QQ - 每一天，乐在沟通</h1>
+
       <div id="fisrtbg" class="activebg fisrtbg" data-stellar-background-ratio="0.03"
            style="background-position: 50% 30.54px;"></div>
-      <div class="qfigure qcall">
-        <div class="qw960">
-          <div class="txtwrap">
-            <h2>沟通，是跨越千山万水的亲切声音</h2>
-            <p>无论何时何地，你都能自由享受QQ在各类终端<br>上带来的高清通话，与好友一起想聊多久聊多久</p>
-            <p><a class="knmore" href="https://im.qq.com/album/v/" target="_blank"
-                  pgv="im.index2015.more_1">了解更多 &gt;</a></p>
-            <ul class="figs">
-              <li class="f01">屏幕分享</li>
-              <li class="f02">群组通话</li>
-              <li class="f03">两人、多人通话</li>
-            </ul>
-          </div>
-          <div class="qcallAnimate">
-          </div>
-        </div>
+      <div class="qfigure qcall" style="background-position: 50% 30.54px;background-image: url(/images/p2.jpg);">
+<!--        <div class="qw960">-->
+<!--          <div class="txtwrap">-->
+<!--            <h2>沟通，是跨越千山万水的亲切声音</h2>-->
+<!--            <p>无论何时何地，你都能自由享受QQ在各类终端<br>上带来的高清通话，与好友一起想聊多久聊多久</p>-->
+<!--            <p><a class="knmore" href="https://im.qq.com/album/v/" target="_blank"-->
+<!--                  pgv="im.index2015.more_1">了解更多 &gt;</a></p>-->
+<!--            <ul class="figs">-->
+<!--              <li class="f01">屏幕分享</li>-->
+<!--              <li class="f02">群组通话</li>-->
+<!--              <li class="f03">两人、多人通话</li>-->
+<!--            </ul>-->
+<!--          </div>-->
+<!--          <div class="qcallAnimate">-->
+<!--          </div>-->
+<!--        </div>-->
       </div>
     </div>
     <div id="secondbg" class="activebg secondbg" data-stellar-background-ratio="0.05"
@@ -106,58 +114,58 @@
     <div class="newfoot">
       <div class="qmaps">
         <div class="plats">
-          <h3>了解热门产品</h3>
-          <a class="plmb" href="#">QQ
-            手机版</a>
-          <a class="plpc" href="#" >QQ PC版</a>
-          <a class="plmac" href="#">QQ Mac版</a>
-          <a class="plpad" href="#">QQ Pad版</a>
+<!--          <h3>了解热门产品</h3>-->
+<!--          <a class="plmb" href="#">QQ-->
+<!--            手机版</a>-->
+<!--          <a class="plpc" href="#" >QQ PC版</a>-->
+<!--          <a class="plmac" href="#">QQ Mac版</a>-->
+<!--          <a class="plpad" href="#">QQ Pad版</a>-->
         </div>
 
         <div class="map qac">
-          <h3>QQ安全</h3>
-          <ul>
-            <li><a href="#" >安全中心</a></li>
-            <li><a href="#">冻结帐号</a></li>
-            <li><a href="#" >举报恶意行为</a></li>
-            <li><a href="#" >恢复好友和群</a></li>
-            <li><a href="#">注销帐号</a></li>
-          </ul>
+<!--          <h3>QQ安全</h3>-->
+<!--          <ul>-->
+<!--            <li><a href="#" >安全中心</a></li>-->
+<!--            <li><a href="#">冻结帐号</a></li>-->
+<!--            <li><a href="#" >举报恶意行为</a></li>-->
+<!--            <li><a href="#" >恢复好友和群</a></li>-->
+<!--            <li><a href="#">注销帐号</a></li>-->
+<!--          </ul>-->
         </div>
 
         <div class="map qfaq">
-          <h3>帮助反馈</h3>
-          <ul>
-            <li><a href="#">腾讯客服</a></li>
-            <li><a href="#">反馈问题</a></li>
-            <li><a href="#">腾讯微博</a></li>
-            <li><a href="#">新浪微博</a></li>
-          </ul>
+<!--          <h3>帮助反馈</h3>-->
+<!--          <ul>-->
+<!--            <li><a href="#">腾讯客服</a></li>-->
+<!--            <li><a href="#">反馈问题</a></li>-->
+<!--            <li><a href="#">腾讯微博</a></li>-->
+<!--            <li><a href="#">新浪微博</a></li>-->
+<!--          </ul>-->
         </div>
         <div class="map qlink">
-          <h3>友情链接</h3>
-          <ul>
-            <li><a href="#" >兴趣部落</a></li>
-            <li><a href="#" >QQ群</a></li>
-            <li><a href="#" >QQ音乐</a>
-            </li>
-            <li><a href="#">QQ浏览器</a></li>
-            <li><a href="#">腾讯视频</a></li>
-            <li><a href="#">腾讯体验中心</a></li>
-            <li><a href="#">腾讯电脑管家</a>
-            </li>
-          </ul>
-          <ul class="sub-list">
-            <li><a href="#" >TIM</a></li>
-            <li><a href="#" >腾讯文档</a></li>
-            <li><a href="#" >微云</a></li>
-            <li><a href="#" >腾讯云</a></li>
-          </ul>
+<!--          <h3>友情链接</h3>-->
+<!--          <ul>-->
+<!--            <li><a href="#" >兴趣部落</a></li>-->
+<!--            <li><a href="#" >QQ群</a></li>-->
+<!--            <li><a href="#" >QQ音乐</a>-->
+<!--            </li>-->
+<!--            <li><a href="#">QQ浏览器</a></li>-->
+<!--            <li><a href="#">腾讯视频</a></li>-->
+<!--            <li><a href="#">腾讯体验中心</a></li>-->
+<!--            <li><a href="#">腾讯电脑管家</a>-->
+<!--            </li>-->
+<!--          </ul>-->
+<!--          <ul class="sub-list">-->
+<!--            <li><a href="#" >TIM</a></li>-->
+<!--            <li><a href="#" >腾讯文档</a></li>-->
+<!--            <li><a href="#" >微云</a></li>-->
+<!--            <li><a href="#" >腾讯云</a></li>-->
+<!--          </ul>-->
         </div>
       </div>
       <div class="copyright">
-        <p>Copyright © 1998-2020 Tencent. All Rights Reserved.</p>
-        <p>腾讯公司 版权所有</p>
+<!--        <p>Copyright © 1998-2020 Tencent. All Rights Reserved.</p>-->
+        <p>by:TimeHo</p>
       </div>
     </div>
   </div>
@@ -207,7 +215,7 @@ export default defineComponent({
   bottom: 0;
   width: 664px;
   height: 763px;
-  background: transparent url(/images/pic1.png) no-repeat 0 0;
+  /*background: transparent url(/images/pic1.png) no-repeat 0 0;*/
 }
 .qcall .txtwrap {
   position: absolute;
@@ -563,15 +571,19 @@ export default defineComponent({
   float: left;
   width: 459px;
   height: 116px;
-  background: url(/images/pc-title.png) no-repeat center top;
+  /*background: url(/images/pc-title.png) no-repeat center top;*/
 }
 .title-btn {
+  transform: translate(100px, -60px);
   float: right;
-  width: 248px;
-  height: 86px;
-  background: url(/images/title-button-s.png) no-repeat center top;
+  width: 450px;
+  height: 450px;
+  /*background: url(/images/title-button-s.png) no-repeat center top;*/
 }
-
+/*.title-btn video{*/
+/*  width: 450px;*/
+/*  height: 450px;*/
+/*}*/
 .plats {
   float: left;
   width: 510px;
@@ -733,18 +745,21 @@ li {
 }
 
 .logoLink {
+  font-size: 2rem;
+  font-family: revert;
   float: left;
   display: block;
-  width: 106px;
-  height: 0px;
-  overflow: hidden;
-  padding-top: 76px;
-  font-size: 0;
-  background-color: transparent;
-  background-image: url(/images/logo.png);
-  background-repeat: no-repeat;
-  background-position: 0 50%;
-  background-size: 92px 44px;
+  /*width: 60px;*/
+  height: 75px;
+  line-height: 75px;
+  /*overflow: hidden;*/
+  /*padding-top: 76px;*/
+  /*font-size: 0;*/
+  /*background-color: transparent;*/
+  /*background-image: url(/images/logo.png);*/
+  /*background-repeat: no-repeat;*/
+  /*background-position: 0 50%;*/
+  /*background-size: 92px 44px;*/
 }
 
 .topNav {

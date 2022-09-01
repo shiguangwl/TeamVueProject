@@ -1,9 +1,13 @@
 <template>
   <div class="DataViewPage">
     <el-calendar>
-      <template #dateCell="{data}">
-        <p :class="data.isSelected ? 'is-selected' : ''">
-          {{ data.day.split('-').slice(1).join('-') }} {{ data.isSelected ? '✔算法第三方啥地方士大夫大师傅埃尔文发生肺癌的大额算法第三方瓦房店阿发额问问第三方啊️' : '' }}
+      <template>
+
+        '✔'
+        <p>
+          <span v-if="item.todoFdate.substring(0,10) === data.day">
+            {{item.todoCentent}}
+          </span>
         </p>
       </template>
     </el-calendar>
@@ -11,12 +15,28 @@
 </template>
 
 <script>
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, reactive, toRefs } from 'vue'
+import { todoPro } from '@/utils/api'
 
 export default defineComponent({
   name: 'DataViewPage',
   setup () {
-    return {}
+    const state = reactive({
+      dataList: ''
+    })
+    const getData = async () => {
+      const params = {
+        page: 1,
+        limit: 1000,
+        type: 1
+      }
+      // const { data: res } = await todoPro.todoList(params)
+      // state.dataList = res.page.list
+    }
+    getData()
+    return {
+      ...toRefs(state)
+    }
   }
 })
 </script>

@@ -110,6 +110,11 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/PageView/TodoPage.vue')
       },
       {
+        path: '/utool',
+        name: 'utool',
+        component: () => import('@/views/PageView/UtoolPage.vue')
+      },
+      {
         path: '/project',
         name: 'Project',
         component: () => import('@/views/PageView/ProjectPage.vue')
@@ -156,11 +161,11 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach((to, from, next) => {
-  if (to.path === '/' || to.path === '/login') { return next() }
-  // 获取token
-  const tokenStr = window.sessionStorage.getItem('token')
-  if (!tokenStr) { return next('/') }
-  next()
-})
+// router.beforeEach((to, from, next) => {
+//   if (to.path === '/' || to.path === '/login') { return next() }
+//   // 获取token
+//   const tokenStr = window.sessionStorage.getItem('token')
+//   if (!tokenStr) { return next('/') }
+//   next()
+// })
 export default router

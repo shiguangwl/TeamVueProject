@@ -1,15 +1,13 @@
 <template>
-  <div class="MoveShowInfo">
+  <div class="MoveShowInfo" id="MoveShowInfoID">
     <div class="title">
-      <span>斗罗大陆</span>
+      <span>{{ data.title }}</span>
     </div>
     <div class="subtitle">
-      <span>DUO LUO BIG ROAD</span>
+      <span>{{data.comment}}</span>
     </div>
     <div class="tags">
-      <el-tag type="info">标签1</el-tag>
-      <el-tag type="info">标签2</el-tag>
-      <el-tag type="info">标签2</el-tag>
+      <el-tag type="info" v-for="i in data.moviecategory" :key="i">{{i}}</el-tag>
     </div>
     <div class="info">
       <div class="box">
@@ -21,39 +19,39 @@
       <div class="box">
         <span>编剧：</span>
         <div class="t">
-          朱一龙 / 童瑶 / 王志文 / 王阳 / 朱珠 / 李强 / 张子贤 / 姚安濂 / 袁文康 / 代旭
+          <span v-for="i in data.director" :key="i">{{i}}/</span>
         </div>
       </div>
       <div class="box">
         <span>主演：</span>
-        <div class="t">
-          朱一龙 / 童瑶 / 王志文 / 王阳 / 朱珠 / 李强 / 张子贤/姚安濂/袁文康/代旭
+        <div class="t" style="width: 390px;">
+          <span v-for="i in data.actor" :key="i">{{i}}/</span>
         </div>
       </div>
       <div class="box">
         <span>上映：</span>
         <div class="t">
-          2021-06-07(中国大陆)
+          {{data.pubdate}}
         </div>
       </div>
       <div class="box">
         <span>集数：</span>
         <div class="t">
-          43集 - 更新至第34集
+          {{data.upinfo}}
         </div>
       </div>
       <div class="box">
         <span style="width: 300px;">简介：</span>
         <div class="t text-flow-ellipsis-multiple" style="padding-right: 230px">
-          1936年，年轻的复兴社干部训练班学员林楠笙，被复兴社特务处上海区区长陈默群带往上海，参加抓捕潜伏在复兴社的地下党任务。在执行任务的过程中，正直单纯的林楠笙不断被顾慎言、纪中原、朱怡贞、左秋明等共产党人为国为民的使命感和大无畏的牺牲精神感召，对国民党内部的乱象和当时中国人民的苦难有了更深的思考，也对共产党人的信仰和追求有了更深的了解。林楠笙在对日伪的斗争中勇敢果毅，屡立战功。在民族大义面前，多次和共产党人站到一起，尤其是在一些关键时刻，他利用自己在军统的特殊身份，为上海地下党组织提供了极大的帮助。经过艰苦斗争和生死考验后，林楠笙成长为一名真正的共产党员。并在解放战争的关键时刻，为党和国家做出了突出贡献。
+          {{data.description}}
         </div>
       </div>
     </div>
     <div class="img">
-      <img src="https://oss.wwdianying.net/dy/f0ad74caeb6882076ed826a41813d140" alt="">
+      <img v-lazy="data.cdncover" alt="">
     </div>
     <div class="bottom">
-      <router-link :to="{ path: '/coffee/movie/play-2'}">
+      <router-link :to="{ path: '/coffee/movie/play-'+VCid+'&'+Vid}">
         <el-button style="float: right;width: 200px" type="success" icon="el-icon-share" round>立即播放</el-button>
       </router-link>
     </div>
@@ -61,12 +59,40 @@
 </template>
 
 <script>
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, onActivated, reactive, toRefs, watch } from 'vue'
+import { useRoute } from 'vue-router'
+import { VideoData } from '@/utils/api'
 
 export default defineComponent({
   name: 'MoveShowInfo',
   setup () {
-    return {}
+    const state = reactive({
+      data: '',
+      VCid: '',
+      Vid: ''
+    })
+    const route = useRoute()
+    onActivated(() => {
+      loadData()
+    })
+    const loadData = async () => {
+      const param = route.params.id.split('&')
+      state.VCid = param[0]
+      state.Vid = param[1]
+      const params = {
+        cat: state.VCid,
+        id: state.Vid
+      }
+      const { data: res } = await VideoData.GetDetailInfo(params)
+      state.data = res.data
+      document.querySelector('#ShowMovieInfoTop > div.top').scrollIntoView()
+    }
+    watch(() => route.path, () => {
+      loadData()
+    })
+    return {
+      ...toRefs(state)
+    }
   }
 })
 </script>

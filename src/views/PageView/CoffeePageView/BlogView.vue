@@ -1,15 +1,21 @@
 <template>
   <div class="BlogView">
     <el-card class="box-card" style="width: 75%;overflow: scroll">
-      <div class="item" v-for="item in listData.list" :key="item.pkArticleId">
-        <router-link :to="{ path: '/coffee/blog/articleLong-'+item.pkArticleId }">
+      <div class="item">
+        <router-link >
           <div class="item_box">
             <div class="left">
-              <img src="https://www.dmoe.cc/random.php" alt="图片">
+              <img v-lazy="'https://api.kdcc.cn/img/rand.php'+ getimg()" alt="图片">
             </div>
             <div class="right">
-              <div class="title">{{item.articleTitle}}</div>
-              <div class="mini_content">{{item.articleMiniCentent}}</div>
+              <div class="title">东风股份的时光</div>
+              <div class="desc" style="color: #9b9b9b;">
+                <span>
+                  发表于: 2021-12-18</span>
+                <span> | </span>
+                <span><a  style="color: #9b9b9b;" href="#">程序人生</a></span>
+              </div>
+              <div class="mini_content">dsfgfdgfdsgsfd</div>
             </div>
           </div>
         </router-link>
@@ -27,7 +33,7 @@
       <el-card class="box-card">
         <div class="info_box">
           <div class="head_img" style="height: 100px;display: flex;justify-content: center;align-items: center;">
-            <img src="http://q1.qlogo.cn/g?b=qq&nk=2513356652&s=640" alt="" style="height: 65px;width: 65px;margin:0 auto;">
+            <img v-lazy="'http://q1.qlogo.cn/g?b=qq&nk=2513356652&s=640'" alt="" style="height: 65px;width: 65px;margin:0 auto;">
           </div>
           <div class="name">
             <h3 style="text-align: center">TimeHo</h3>
@@ -84,11 +90,16 @@ export default defineComponent({
       }
       GetBlogIndexArticle(params)
     }
+    // 获取图片参数
+    const getimg = () => {
+      return '?p=' + Math.round(Math.random() * 255)
+    }
     GetBlogIndexArticle()
     return {
       ...toRefs(state),
       GetBlogIndexArticle,
-      handleCurrentChange
+      handleCurrentChange,
+      getimg
     }
   }
 })
@@ -102,6 +113,7 @@ export default defineComponent({
     display: flex;
   }
   .item_box{
+    box-shadow: 0 4px 8px 6px rgb(7 17 27 / 6%);
     height: 160px;
     margin-bottom: 15px;
     width: 100%;
@@ -111,7 +123,14 @@ export default defineComponent({
     border-bottom: 1px #F0F0F0 solid;
     cursor: pointer;
   }
+  .item_box:hover{
+    box-shadow: 0 4px 12px 12px rgb(7 17 27 / 15%)
+  }
   .item_box .left{
+    transition: all 0.6s;
+    :hover{
+      transform: scale(1.4);
+    }
     height: 100%;
     width: 30%;
     background-color: rebeccapurple;
@@ -131,7 +150,6 @@ export default defineComponent({
       font-size: 1.5rem;
     }
     .mini_content{
-      color: #9b9b9b;
     }
   }
   .page_split{

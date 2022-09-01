@@ -1,9 +1,9 @@
 <template>
   <div class="DiaryCentent">
     <section class="border-2">
-      <article style="font-family:'HYTiaoTiao';">{{data.content}}</article>
+      <article style="font-family:'HYTiaoTiao';">我是日记内容，开发日记测试</article>
 <!--      <article style="font-family:'HYTiaoTiao';">{{data.content}}<mark style="font-family:'HYTiaoTiao';">和你打字聊天</mark>，就算连胳膊也打断了，我的心里也会有你位置。</article>-->
-      <address style="font-family: -apple-system,'Helvetica Neue','Helvetica','Tahoma','Arial','PingFang SC',STHeiTi,'Microsoft Yahei';"><time>{{data.fdate}}</time><span>Shinjuku-ku·Cloudy·23℃</span></address>
+      <address style="font-family: -apple-system,'Helvetica Neue','Helvetica','Tahoma','Arial','PingFang SC',STHeiTi,'Microsoft Yahei';"><time>2022年3月10日20:32:36</time><span>Shinjuku-ku·Cloudy·23℃</span></address>
     </section>
   </div>
 </template>
@@ -48,7 +48,6 @@ export default defineComponent({
     border-width: 2px 5px 4px 3px;
     border-style: solid;
     border-color: #03081a;
-    overflow-y: scroll;
     display: flex;
     flex-direction: column;
     background-color: #fff;
@@ -57,8 +56,8 @@ export default defineComponent({
   }
   article img {display: none;}
   article {
+    margin-bottom: 15px;
     font-size: 1.45rem;
-    margin: 0;
     padding: .4rem;
     letter-spacing: 2px;
     text-align: justify;

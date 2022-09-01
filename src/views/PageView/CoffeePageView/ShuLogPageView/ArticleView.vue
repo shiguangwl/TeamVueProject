@@ -4,16 +4,14 @@
       <div class="ArticleBox">
         <el-card shadow="hover">
           <el-breadcrumb separator-class="el-icon-arrow-right">
-            <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item>活动管理</el-breadcrumb-item>
-            <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-            <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/coffee/shulog' }">首页</el-breadcrumb-item>
+            <el-breadcrumb-item>查看页面</el-breadcrumb-item>
           </el-breadcrumb>
           <el-divider></el-divider>
           <div class="InfoBox">
             <div class="user">
               <div class="img">
-                <img src="http://q1.qlogo.cn/g?b=qq&nk=2513356652&s=640" alt="">
+                <img v-lazy="'http://q1.qlogo.cn/g?b=qq&nk=2513356652&s=640'" alt="">
               </div>
               <div class="title">TimeHo</div>
             </div>
@@ -25,7 +23,7 @@
           </div>
           <el-divider></el-divider>
           <div class="ArticleContentBox">
-            <p style="font-family: HYTiaoTiao;">{{articleContent.content}}</p>
+            <v-md-editor ref="preview" v-model="articleContent.content" height="100%"  mode="preview"></v-md-editor>
           </div>
           <div class="like">
             <div class="tag">
@@ -62,14 +60,24 @@
         by @TimeHo 2021
       </div>
     </div>
-    <div class="Right">
-      <HotTag></HotTag>
-    </div>
+    <el-affix :offset="70">
+      <div class="right_box" style="height: 100%;overflow: scroll">
+        <div>
+          <div
+            v-for="anchor in titles" :key="anchor.lineIndex"
+            :style="{ padding: `10px 0 10px ${anchor.indent * 15}px`}"
+            @click="handleAnchorClick(anchor)"
+          >
+            <a style="cursor: pointer">{{ anchor.title }}</a>
+          </div>
+        </div>
+      </div>
+    </el-affix>
   </div>
 </template>
 
 <script>
-import { defineComponent, onMounted, reactive, toRefs } from 'vue'
+import { defineComponent, onActivated, onDeactivated, onMounted, onUpdated, reactive, ref, toRefs } from 'vue'
 import DiaryNew from '@/components/CoffeeComponent/community/DiaryNew'
 import PostItem from '@/components/CoffeeComponent/community/PostItem'
 import HotTag from '@/components/CoffeeComponent/community/HotTag'
@@ -79,19 +87,49 @@ import { Community } from '@/utils/api'
 export default defineComponent({
   name: 'ArticleView',
   components: {
-    HotTag
   },
   setup () {
+    const preview = ref(null)
     const state = reactive({
       articleContent: '',
-      text: '# 我是标题'
+      titles: []
     })
     const route = useRoute()
-    onMounted(async () => {
-      const id = route.params.id
-      const { data: res } = await Community.GetContent(id)
-      state.articleContent = res.hosAcentent
+    // 渲染标题
+    const renderH = () => {
+      // 渲染目录
+      const anchors = preview.value.$el.querySelectorAll('h1,h2,h3,h4,h5,h6')
+      // console.log(anchors, 'anchors')
+      const titles = Array.from(anchors).filter((title) => !!title.innerText.trim())
+      if (!titles.length) {
+        state.titles = []
+        return
+      }
+      const hTags = Array.from(new Set(titles.map((title) => title.tagName))).sort()
+      state.titles = titles.map((el) => ({
+        title: el.innerText,
+        lineIndex: el.getAttribute('data-v-md-line'),
+        indent: hTags.indexOf(el.tagName)
+      }))
+    }
+    // onMounted(async () => {
+    //   loadData()
+    // })
+    onUpdated(async () => {
+      console.log('开始渲染目录树')
+      renderH()
     })
+    onDeactivated(() => {
+      state.articleContent = ''
+    })
+    onActivated(() => {
+      loadData()
+    })
+    const loadData = async () => {
+      // const id = route.params.id
+      // const { data: res } = await Community.GetContent(id)
+      // state.articleContent = res.hosAcentent
+    }
     return {
       ...toRefs(state)
     }
@@ -125,7 +163,7 @@ export default defineComponent({
     display: flex;
     flex-grow: 1;
     .Left{
-      width: 60%;
+      width: 77%;
       display: flex;
       flex-direction: column;
       .ArticleBox{

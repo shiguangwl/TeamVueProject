@@ -2,6 +2,7 @@
   <div class="ListGrop">
     <el-collapse v-model="activeNames">
       <el-collapse-item title="清单" name="1">
+        <el-input v-model="addGroupName" @keyup.enter="addGroup" placeholder='输入:"分组名,描述" -> 回车添加' />
         <div class="ListGorpItems">
           <ul>
             <li v-for="item in dataList" :key="item.todoGId" @click="loadGroupData(item.todoGId)">
@@ -18,17 +19,38 @@
 
 <script>
 import { defineComponent, reactive, toRefs } from 'vue'
+import { todoPro } from '@/utils/api'
+import { ElMessage } from 'element-plus'
 
 export default defineComponent({
   name: 'ListGrop',
-  props: {
-    // 父组件传递数据
-    dataList: Array
-  },
   setup (props, ctx) {
     const state = reactive({
-      activeNames: ['1']
+      activeNames: ['1'],
+      addGroupName: '',
+      dataList: []
     })
+    // 请求分组列表
+    const getTodoGroupList = async () => {
+      // const { data: res } = await todoPro.todoGroupList()
+      // state.dataList = res.page.list
+    }
+    // 添加分组
+    const addGroup = async () => {
+      const params = {
+        todoGName: state.addGroupName.split(',')[0],
+        todoGDesc: state.addGroupName.split(',')[1]
+      }
+      const { data: res } = await todoPro.addGroup(params)
+      if (res.code === 0) {
+        ElMessage({ message: '操作成功', type: 'success' })
+        getTodoGroupList()
+        state.addGroupName = ''
+      } else {
+        ElMessage(res.msg)
+      }
+    }
+    // 加载分组
     const loadGroupData = (groupId) => {
       const params = {
         page: 1,
@@ -37,10 +59,12 @@ export default defineComponent({
       }
       ctx.emit('loadData', params)
     }
+    getTodoGroupList()
     return {
       ...toRefs(state),
       ...toRefs(props),
-      loadGroupData
+      loadGroupData,
+      addGroup
     }
   }
 })

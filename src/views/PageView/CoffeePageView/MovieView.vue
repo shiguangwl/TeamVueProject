@@ -1,8 +1,9 @@
+<!--首页-->
 <template>
   <div class="MovieView">
     <div class="top">
       <div class="logo">
-        <img src="https://cdn.jsdelivr.net/gh/imdianying/im@2021032601/statics/images/index-logo.png" alt="">
+        <img v-lazy="'https://cdn.jsdelivr.net/gh/imdianying/im@2021032601/statics/images/index-logo.png'" alt="">
       </div>
       <div class="SearchBox">
         <VSearch></VSearch>
@@ -15,7 +16,8 @@
             <VShowBox></VShowBox>
           </el-col>
           <el-col :span="4">
-            <VSortList></VSortList>
+<!--            排行榜组件           -->
+            <VSortList :data="HotData.data" :title="'电影•热榜'"></VSortList>
           </el-col>
         </el-row>
       </div>
@@ -30,10 +32,11 @@
 </template>
 
 <script>
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, reactive, toRefs } from 'vue'
 import VSearch from '@/components/CoffeeComponent/community/MovieComponent/index/VSearch'
 import VShowBox from '@/components/CoffeeComponent/community/MovieComponent/index/VshowBox/VShowBox'
 import VSortList from '@/components/CoffeeComponent/community/MovieComponent/index/VSortList'
+import { VideoData } from '@/utils/api'
 
 export default defineComponent({
   name: 'MovieView',
@@ -43,7 +46,17 @@ export default defineComponent({
     VSortList
   },
   setup () {
-    return {}
+    const state = reactive({
+      HotData: []
+    })
+    const loadHotData = async () => {
+      const { data: res } = await VideoData.GetRankData(2)
+      state.HotData = res
+    }
+    loadHotData()
+    return {
+      ...toRefs(state)
+    }
   }
 })
 </script>
@@ -68,6 +81,7 @@ export default defineComponent({
         margin: 30px auto;
       }
       .SearchBox{
+        z-index: 9999;
         position: absolute;
         top: 140px;
         left: 50%;

@@ -3,70 +3,12 @@
     <el-row>
       <el-col :span="18">
         <div class="Left">
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
-          <el-button type="warning" round>第9集</el-button>
+          <el-button @click="changevideo(value.url)" v-for="value in sourceData[Object.keys(sourceData)[sourceIndex]]" :key="value.id" type="warning" round>{{value.playlink_num}}</el-button>
         </div>
       </el-col>
       <el-col :span="6">
         <div class="Right">
-          <el-button type="info"  size="small">官方资源</el-button>
-          <el-button type="info"  size="small">资源1</el-button>
-          <el-button type="info"  size="small">资源2</el-button>
-          <el-button type="info"  size="small">资源3</el-button>
+          <el-button type="info"  size="small" v-for="key in Object.keys(sourceData)" :key="key">{{key}}</el-button>
         </div>
       </el-col>
     </el-row>
@@ -74,12 +16,40 @@
 </template>
 
 <script>
-import { defineComponent, reactive } from 'vue'
+import { computed, defineComponent, onActivated, reactive, toRefs } from 'vue'
 
 export default defineComponent({
   name: 'PlaySource',
-  setup () {
-    return {}
+  props: {
+    sourceData: Object
+  },
+  setup (props, ctx) {
+    const state = reactive({
+      // sourceData: props.sourceData,
+      sourceIndex: 0
+    })
+    onActivated(() => {
+      changevideo(props.sourceData[Object.keys(props.sourceData)[0]])
+      // state.keys = state.sourceData.keys()
+      // state.curentList = state.sourceData[state.keys[0]]
+    })
+    // const keys = computed(() => {
+    //   console.log(props.sourceData.keys())
+    //   return props.sourceData.keys()
+    // })
+    // const curentList = computed(() => {
+    //   // 返回的是ref对象
+    //   console.log(props.sourceData[state.keys[state.sourceIndex]])
+    //   return props.sourceData[keys[state.sourceIndex]]
+    // })
+    const changevideo = (url) => {
+      ctx.emit('changePlay', url)
+    }
+    return {
+      ...toRefs(state),
+      ...toRefs(props),
+      changevideo
+    }
   }
 })
 </script>
@@ -90,7 +60,7 @@ export default defineComponent({
       height: calc( 100vh - 3.4rem);
       overflow: auto;
       button{
-        margin: 5px 8px;
+        margin: 5px 6px;
       }
     }
     .Right{

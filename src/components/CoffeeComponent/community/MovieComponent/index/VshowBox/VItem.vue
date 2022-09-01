@@ -1,14 +1,15 @@
+<!--显示影视item-->
 <template>
   <div class="VItem">
     <div class="img">
-      <router-link :to="{ path: '/coffee/movie/show-2' }">
-        <img :src="dataItem.img" alt="">
+      <router-link :to="{ path: '/coffee/movie/show-'+dataItem.cat+'&'+dataItem.ent_id }">
+        <img v-lazy="dataItem.cover" alt="">
       </router-link>
     </div>
     <div class="title">
-      <router-link :to="{ path: '/coffee/movie/show-2' }">{{dataItem.title}}</router-link>
+      <router-link :to="{ path: '/coffee/movie/show-'+dataItem.cat+'&'+dataItem.ent_id }">{{dataItem.title}}</router-link>
     </div>
-    <span>{{dataItem.hint}}</span>
+    <span>{{dataItem.upinfo}}</span>
   </div>
 </template>
 
@@ -20,7 +21,7 @@ export default defineComponent({
   props: {
     data: Object
   },
-  setup (props, ctx) {
+  setup (props) {
     const state = reactive({
       dataItem: props.data
     })

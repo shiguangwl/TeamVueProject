@@ -16,11 +16,11 @@
         <span class="span_title">今天</span>
         <span class="span_num">5</span>
       </li>
-      <li>
-        <i class="el-icon-folder-checked"></i>
-        <span class="span_title">项目任务</span>
-        <span class="span_num">44</span>
-      </li>
+<!--      <li>-->
+<!--        <i class="el-icon-folder-checked"></i>-->
+<!--        <span class="span_title">项目任务</span>-->
+<!--        <span class="span_num">44</span>-->
+<!--      </li>-->
     </ul>
   </div>
 </template>

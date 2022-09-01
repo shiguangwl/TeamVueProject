@@ -1,17 +1,18 @@
+<!--影视搜索组件-->
 <template>
   <div class="VSearch"  :class="{ isshowclass: isshow }">
     <div class="Search">
-      <input type="text" placeholder="全网搜索你想看的~"   @focus="isshow=false" @blur="isshow=true"  >
+      <input type="text" v-model="Kw" placeholder="全网搜索你想看的~"   @focus="isshow=false" @blur="isshow=true"  >
       <div class="right">
         <div class="all_btn">
-          <router-link :to="{ path: '/coffee/movie/search-3' }">
+          <router-link :to="{ path: '/coffee/movie/search-'+Kw }">
             <i class="el-icon-s-opportunity"></i>
             <span>搜全网</span>
           </router-link>
         </div>
         <el-divider direction="vertical"></el-divider>
         <div class="search_btn">
-            <router-link :to="{ path: '/coffee/movie/search-3' }"><i class="el-icon-search"></i></router-link>
+            <router-link :to="{ path: '/coffee/movie/search-'+Kw }"><i class="el-icon-search"></i></router-link>
         </div>
       </div>
     </div>
@@ -19,13 +20,12 @@
     <div class="Hot">
       <span>大家都在搜这些</span>
       <div class="box">
-        <a href="#">斗罗大陆</a>
-        <a href="#">速度与机器9</a>
-        <a href="#">御赐小仵作</a>
-        <a href="#">困在时间里的父亲</a>
-        <a href="#">速度与机器9</a>
-        <a href="#">御赐小仵作</a>
-        <a href="#">困在时间里的父亲</a>
+        <a href="#" @mousedown="Kw= '斗罗大陆'">斗罗大陆</a>
+        <a href="#" @mousedown="Kw= '突围'">突围</a>
+        <a href="#" @mousedown="Kw= '毒液2'">毒液2</a>
+        <a href="#" @mousedown="Kw= '长津湖'">长津湖</a>
+        <a href="#" @mousedown="Kw= '鱿鱼游戏'">鱿鱼游戏</a>
+        <a href="#" @mousedown="Kw= '斗破苍穹 特别篇3'">斗破苍穹 特别篇3</a>
       </div>
     </div>
   </div>
@@ -38,7 +38,8 @@ export default defineComponent({
   name: 'VSearch',
   setup () {
     const state = reactive({
-      isshow: true
+      isshow: true,
+      Kw: ''
     })
     return {
       ...toRefs(state)

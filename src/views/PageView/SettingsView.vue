@@ -1,7 +1,7 @@
 <template>
   <div class="SettingsView">
     <div class="userinfo">
-      <img src="http://q1.qlogo.cn/g?b=qq&nk=2513356652&s=640" alt="">
+      <img v-lazy="'http://q1.qlogo.cn/g?b=qq&nk=2513356652&s=640'" alt="">
       <div class="box">
         <p>
           <a href="#">{{ userinfo.username }}</a>

@@ -7,6 +7,17 @@
                             :timestamp="item.fdate" placement="top">
             <DiaryCentent :data="item"></DiaryCentent>
           </el-timeline-item>
+          <DiaryCentent></DiaryCentent>
+          <DiaryCentent></DiaryCentent>
+          <DiaryCentent></DiaryCentent>
+          <DiaryCentent></DiaryCentent>
+          <DiaryCentent></DiaryCentent>
+          <DiaryCentent></DiaryCentent>
+<!--              TODO 分页待完善      -->
+<!--          <el-pagination background layout="prev, pager, next"-->
+<!--                         :total="'100'"-->
+<!--                         :page-size="'10'"-->
+<!--          ></el-pagination>-->
         </el-timeline>
       </div>
     </div>
@@ -14,7 +25,7 @@
 </template>
 
 <script>
-import { defineComponent, onMounted, provide, reactive, toRefs } from 'vue'
+import { defineComponent, onActivated, onMounted, provide, reactive, toRefs } from 'vue'
 import DiaryCentent from '@/components/CoffeeComponent/community/DiaryCentent'
 import { Community } from '@/utils/api'
 import { ElMessage } from 'element-plus'
@@ -29,7 +40,11 @@ export default defineComponent({
     })
     // 查询日记列表
     const GetDiaryList = async () => {
-      const { data: res } = await Community.GetDiaryList()
+      const params = {
+        page: 1,
+        limit: 1000
+      }
+      const { data: res } = await Community.GetDiaryList(params)
       if (res.code === 0) {
         state.pageData = res.page
         state.pageData.list.reverse()
@@ -37,8 +52,9 @@ export default defineComponent({
         ElMessage(res.msg)
       }
     }
-    // 初始化数据
-    GetDiaryList()
+    onActivated(() => {
+      GetDiaryList()
+    })
     return {
       ...toRefs(state)
     }

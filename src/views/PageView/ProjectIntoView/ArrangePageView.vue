@@ -1,5 +1,8 @@
 <template>
-  ArrangePageView
+  <div class="ArrangePageView" style="padding: 100px">
+    <h1>开发中~</h1>
+    <el-skeleton :rows="9" animated />
+  </div>
 </template>
 
 <script>

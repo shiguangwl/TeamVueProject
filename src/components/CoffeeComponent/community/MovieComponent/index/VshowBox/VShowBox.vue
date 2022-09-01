@@ -27,7 +27,7 @@ export default defineComponent({
 
     const getData = async () => {
       const { data: res } = await VideoData.GetIndexData()
-      state.dataItme = res
+      state.dataItme = res.data
     }
     // 初始化数据
     getData()

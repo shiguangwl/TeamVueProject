@@ -1,7 +1,8 @@
+<!--播放容器-->
 <template>
   <div class="PlayContainer">
     <iframe id="playbox"
-            src="https://jx.sujx.top/jiexi.php/?url=https://v.youku.com/v_show/id_XNTEwMzgzMDU0OA==.html"
+            :src="playUrl"
             allowfullscreen="true"
             frameborder="0" width="100%"
             height="100%" scrolling="No"
@@ -11,12 +12,17 @@
 </template>
 
 <script>
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, reactive, toRefs } from 'vue'
 
 export default defineComponent({
   name: 'PlayContainer',
-  setup () {
-    return {}
+  props: {
+    playUrl: String
+  },
+  setup (props) {
+    return {
+      ...toRefs(props)
+    }
   }
 })
 </script>

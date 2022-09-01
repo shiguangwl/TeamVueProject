@@ -36,10 +36,15 @@
               <el-checkbox v-model="dataItem.todoStar" label="星标TDDO项"></el-checkbox>
             </el-form-item>
             <el-form-item label="待办类型">
-              <el-input v-model="dataItem.todoType"></el-input>
+              <el-select v-model="dataItem.todoType" placeholder="选择待办类型">
+                <el-option label="默认" value="0" ch></el-option>
+              </el-select>
             </el-form-item>
             <el-form-item label="完成状态">
-              <el-input v-model="dataItem.todoComplete"></el-input>
+              <el-select v-model="dataItem.todoComplete" placeholder="选择待办类型">
+                <el-option label="待办" value="0" ch></el-option>
+                <el-option label="已完成" value="1" ch></el-option>
+              </el-select>
             </el-form-item>
             <el-form-item label="待办周期">
               <el-input v-model="dataItem.todoTimer"></el-input>
@@ -54,11 +59,10 @@
     <div class="Todos">
       <ul>
 
-        <template v-for="item in dataList.slice().reverse()" :key="item.pkId">
-          <li v-if="item.todoComplete == 0">
-            <div class="left"><input type="checkbox" @click="ChangeTodoStatus(item.pkId, item.todoComplete===1?0:1)" class="tui-checkbox"></div>
+          <li>
+            <div class="left"><input type="checkbox" class="tui-checkbox"></div>
             <div class="middle">
-              <span class="todo_title">{{ item.todoCentent }}</span>
+              <span class="todo_title">我是待办Java</span>
               <span class="todo_des">
           <i class="el-icon-arrow-down el-icon--right"></i>
           <span>日期时间...</span>
@@ -71,20 +75,66 @@
               <a class="#" title="删除" @click="delTodoItem(item.pkId)"><i class="el-icon-delete"></i></a>
             </div>
           </li>
-        </template>
+
+        <li>
+          <div class="left"><input type="checkbox" class="tui-checkbox"></div>
+          <div class="middle">
+            <span class="todo_title">数据库原理</span>
+            <span class="todo_des">
+          <i class="el-icon-arrow-down el-icon--right"></i>
+          <span>日期时间...</span>
+        </span>
+          </div>
+          <div class="right">
+            <a class="#" title="移动到"><i class="el-icon-document-copy"></i></a>
+            <a class="#" title="设置日期"><i class="el-icon-date"></i></a>
+            <a class="#" title="星标"><i class="el-icon-star-off"></i></a>
+            <a class="#" title="删除" @click="delTodoItem(item.pkId)"><i class="el-icon-delete"></i></a>
+          </div>
+        </li>
+
+        <li>
+          <div class="left"><input type="checkbox" class="tui-checkbox"></div>
+          <div class="middle">
+            <span class="todo_title">英语</span>
+            <span class="todo_des">
+          <i class="el-icon-arrow-down el-icon--right"></i>
+          <span>日期时间...</span>
+        </span>
+          </div>
+          <div class="right">
+            <a class="#" title="移动到"><i class="el-icon-document-copy"></i></a>
+            <a class="#" title="设置日期"><i class="el-icon-date"></i></a>
+            <a class="#" title="星标"><i class="el-icon-star-off"></i></a>
+            <a class="#" title="删除" @click="delTodoItem(item.pkId)"><i class="el-icon-delete"></i></a>
+          </div>
+        </li>
       </ul>
     </div>
     <div class="compTodo">
       <div><span>已完成</span></div>
       <div class="comTodoList">
         <ul>
-          <template v-for="item in dataList" :key="item.pkId">
-            <li v-if="item.todoComplete == 1">
-              <input  :checked="true" type="checkbox" class="tui-checkbox" @click="ChangeTodoStatus(item.pkId,item.todoComplete===1?0:1)" />
-              <a href="#">{{item.todoCentent}}</a>
-              <span class="todo_title">{{item.updateTime}}</span>
+            <li>
+              <input  :checked="true" type="checkbox" class="tui-checkbox" />
+              <a href="#">数据结构</a>
+              <span class="todo_title">2022-3-10 19:54:55</span>
             </li>
-          </template>
+          <li>
+            <input  :checked="true" type="checkbox" class="tui-checkbox" />
+            <a href="#">计算机网络</a>
+            <span class="todo_title">2022-3-10 19:54:55</span>
+          </li>
+          <li>
+            <input  :checked="true" type="checkbox" class="tui-checkbox" />
+            <a href="#">操作系统</a>
+            <span class="todo_title">2022-3-10 19:54:55</span>
+          </li>
+          <li>
+            <input  :checked="true" type="checkbox" class="tui-checkbox" />
+            <a href="#">汇编</a>
+            <span class="todo_title">2022-3-10 19:54:55</span>
+          </li>
         </ul>
       </div>
     </div>
@@ -117,7 +167,7 @@ export default defineComponent({
         todoType: 0, // 待办类型
         todoComplete: 0, // 是否完成
         todoTimer: '2-2 0/1 * * * ? ', // 待办周期
-        todoFdate: '2029-10-09 15:19:36' // 结束时间
+        todoFdate: '2021-12-13 10:42:05' // 结束时间
       }
     })
     // 提交事件
@@ -136,7 +186,7 @@ export default defineComponent({
           todoType: 0, // 待办类型
           todoComplete: 0, // 是否完成
           todoTimer: '2-2 0/1 * * * ? ', // 待办周期
-          todoFdate: '2029-10-09 15:19:36' // 结束时间
+          todoFdate: '2021-12-13 10:42:05' // 结束时间
         }
       }
     }

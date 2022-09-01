@@ -22,7 +22,7 @@
         </el-input>
       </div>
       <div class="show">
-        <el-tag type="info" style="height: 100%;line-height: 36px">是否同步到日志:</el-tag>
+        <el-tag type="info" style="height: 100%;line-height: 36px">同步日志:</el-tag>
         <el-radio-group v-model="syncLog">
           <el-radio-button label="Y"></el-radio-button>
           <el-radio-button label="N"></el-radio-button>
@@ -65,7 +65,7 @@ export default defineComponent({
           articlePassword: ''
         },
         hosAcententEntity: {
-          content: '66我是文章正文~~~~~~~~~~~'
+          content: state.text
         },
         // 分类
         sortId: state.categoryId[state.categoryId.length - 1],

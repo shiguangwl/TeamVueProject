@@ -1,4 +1,4 @@
-<!--登录界面 TODO 注册功能-->
+<!--登录界面-->
 <template>
   <div class="relative min-h-screen flex">
     <div
@@ -162,7 +162,7 @@
             <span class="h-px w-16 bg-gray-200"></span>
           </div>
           <!--    登录表单      -->
-          <form v-show="!isregister" class="mt-8 space-y-6">
+          <form v-show="!isregister" class="mt-8 space-y-6" @keyup.enter="loginFun">
             <input type="hidden" name="remember" value="true" />
             <div class="relative">
               <label class="ml-3 text-sm font-bold text-gray-700 tracking-wide"
@@ -235,6 +235,7 @@
                   id="remember_me"
                   name="remember_me"
                   type="checkbox"
+                  checked
                   class="
                                             h-4
                                             w-4
@@ -420,19 +421,19 @@
             </div>
             <div class="flex items-center justify-between">
               <div class="flex items-center">
-                <input
-                  id="remember_me1"
-                  name="remember_me"
-                  type="checkbox"
-                  class="
-                                            h-4
-                                            w-4
-                                            bg-blue-500
-                                            focus:ring-blue-400
-                                            border-gray-300
-                                            rounded
-                                        "
-                />
+<!--                <input-->
+<!--                  id="remember_me1"-->
+<!--                  name="remember_me"-->
+<!--                  type="checkbox"-->
+<!--                  class="-->
+<!--                                            h-4-->
+<!--                                            w-4-->
+<!--                                            bg-blue-500-->
+<!--                                            focus:ring-blue-400-->
+<!--                                            border-gray-300-->
+<!--                                            rounded-->
+<!--                                        "-->
+<!--                />-->
 <!--                <label-->
 <!--                  for="remember_me"-->
 <!--                  class="ml-2 block text-sm text-gray-900"-->
@@ -513,10 +514,10 @@ export default defineComponent({
   setup () {
     const state = reactive({
       isregister: false,
-      captchaURL: 'http://localhost:8080/renren-fast/captcha.jpg?uuid=',
+      captchaURL: 'http://localhost:8866/renren-fast/captcha.jpg?uuid=',
       data: {
-        username: 'admin',
-        password: 'admin',
+        username: '',
+        password: '',
         captcha: '', // 验证码
         // eslint-disable-next-line no-use-before-define
         uuid: '' // 验证码对应uuid

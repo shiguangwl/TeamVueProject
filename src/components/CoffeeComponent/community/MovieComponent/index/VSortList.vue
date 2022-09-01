@@ -1,30 +1,34 @@
+<!--排行榜组件-->
 <template>
   <div class="VSortList">
-    <span>电影•月榜</span>
+    <span>{{title}}</span>
     <div class="content">
       <ul>
-        <li><div class="box"><span>1.</span><a href="#">速度与激情9</a></div></li>
-        <li><div class="box"><span>2.</span><a href="#">速度与激情9</a></div></li>
-        <li><div class="box"><span>3.</span><a href="#">速度与激情9</a></div></li>
-        <li><div class="box"><span>4.</span><a href="#">速度与激情9</a></div></li>
-        <li><div class="box"><span>5.</span><a href="#">速度与激情9</a></div></li>
-        <li><div class="box"><span>6.</span><a href="#">速度与激情9</a></div></li>
-        <li><div class="box"><span>7.</span><a href="#">速度与激情9</a></div></li>
-        <li><div class="box"><span>8.</span><a href="#">速度与激情9</a></div></li>
-        <li><div class="box"><span>9.</span><a href="#">速度与激情9</a></div></li>
-        <li><div class="box"><span>0.</span><a href="#">速度与激情9</a></div></li>
+        <li v-for="(item,index) in data" :key="item.ent_id">
+<!--          <router-link :to="{ path: '/coffee/movie/show-1'+'&'+dataItem.ent_id }">-->
+            <div class="box">
+              <span>{{index}}.</span><a href="#">{{item.title}}</a>
+            </div>
+<!--          </router-link>-->
+        </li>
       </ul>
     </div>
   </div>
 </template>
 
 <script>
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, reactive, toRefs } from 'vue'
 
 export default defineComponent({
   name: 'VSortList',
-  setup () {
-    return {}
+  props: {
+    data: Array,
+    title: String
+  },
+  setup (props) {
+    return {
+      ...toRefs(props)
+    }
   }
 })
 </script>
